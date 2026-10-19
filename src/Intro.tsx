@@ -1,12 +1,14 @@
 // Episode intro (~6.5 s):
 // 1. Hook: Tony big in frame, waving at the viewer, the destination blurred behind him.
 // 2. Jump: he cheers and jumps, his time device flashes.
-// 3. Timeline: he lands on a timeline and runs into the past while the year counts down.
+// 3. Timeline: he lands on a timeline at today's year; a giant hand pushes him back in time,
+//    he tumbles along the timeline while the year counts down.
 // 4. Portal: at the target year a portal opens, he dives in, it widens into the first scene.
 import { loadFont } from "@remotion/google-fonts/Montserrat";
 import { AbsoluteFill, Easing, Html5Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { Tony } from "./characters/Tony";
 import { INK, Stage, StreetVesuvius } from "./components/backgrounds/StreetVesuvius";
+import { GiantHand } from "./components/GiantHand";
 import { Expression, Pose } from "./components/Stickman";
 import { FPS, HEIGHT, SAFE_TOP, WIDTH } from "./video";
 
@@ -19,15 +21,18 @@ export const INTRO_FRAMES = F(6.5);
 const T = {
   jump: F(1.9),
   timeline: F(2.4),
-  scrollStart: F(2.75),
-  scrollEnd: F(4.2),
-  portalOpen: F(4.25),
-  dive: F(4.4),
-  irisStart: F(4.6),
-  irisEnd: F(5.15),
-  land: F(5.0),
-  tag: F(5.3),
+  handIn: F(2.7), // the giant hand slides in from the right
+  windup: F(3.0), // it pulls back a little
+  push: F(3.15), // and pushes Tony back in time
+  scrollEnd: F(4.25), // he lands at the target year
+  portalOpen: F(4.3),
+  dive: F(4.45),
+  irisStart: F(4.65),
+  irisEnd: F(5.2),
+  land: F(5.05),
+  tag: F(5.35),
 };
+const scrollStart = T.push + F(0.05);
 
 const NOW = 2026;
 const LINE_Y = 1330; // height of the timeline
@@ -144,29 +149,55 @@ const HookShot: React.FC<{ frame: number; stage: Stage }> = ({ frame, stage }) =
   );
 };
 
-// 3: the timeline. Older years lie to the left; Tony runs left into the past.
+// 3: the timeline. Older years lie to the left. Tony stands at today's year, a giant hand comes in
+// from the right and pushes him; he tumbles back along the timeline to the target year.
+const TONY_SCALE = 1.6;
+const BODY_Y = LINE_Y - 190; // middle of Tony's body on the timeline
+const HAND_SCALE = 1.25;
+
 const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }) => {
-  const current = interpolate(frame, [T.scrollStart, T.scrollEnd], [NOW, year], {
-    ...clamp,
-    easing: Easing.inOut(Easing.cubic),
-  });
-  const speed = Math.abs(
-    interpolate(frame + 1, [T.scrollStart, T.scrollEnd], [NOW, year], { ...clamp, easing: Easing.inOut(Easing.cubic) }) - current,
-  );
+  const scroll = (f: number) =>
+    interpolate(f, [scrollStart, T.scrollEnd], [NOW, year], { ...clamp, easing: Easing.out(Easing.cubic) });
+  const current = scroll(frame);
+  const speed = Math.abs(scroll(frame + 1) - current);
   const xOf = (y: number) => 540 + (y - current) * PX_PER_YEAR;
 
   const drop = interpolate(frame, [T.timeline, T.timeline + F(0.4)], [-700, 0], { ...clamp, easing: Easing.bounce });
   const shrink = interpolate(frame, [T.dive, T.dive + F(0.25)], [1, 0], { ...clamp, easing: Easing.in(Easing.quad) });
 
-  let pose: Pose = "pointing";
+  // Flight after the push: an arc over the line with two backflips, upright again on landing.
+  const p = interpolate(frame, [T.push, T.scrollEnd], [0, 1], clamp);
+  const lift = -Math.sin(Math.PI * p) * 110;
+  const spin = -720 * Easing.out(Easing.cubic)(p);
+
+  // The hand: slides in, pulls back, pushes through, then is left behind on the right.
+  // Fingertips are about 172 px left of handX, so handX 750 touches his back. The camera follows Tony,
+  // so right after the hit the hand falls back to the right instead of passing over him.
+  const handX =
+    frame < T.windup
+      ? interpolate(frame, [T.handIn, T.windup], [1500, 790], { ...clamp, easing: Easing.out(Easing.cubic) })
+      : frame < T.push
+        ? interpolate(frame, [T.windup, T.push], [790, 860], { ...clamp, easing: Easing.out(Easing.quad) })
+        : frame < T.push + F(0.07)
+          ? interpolate(frame, [T.push, T.push + F(0.07)], [860, 745], { ...clamp, easing: Easing.in(Easing.quad) })
+          : interpolate(frame, [T.push + F(0.07), T.push + F(0.4)], [745, 1500], { ...clamp, easing: Easing.in(Easing.quad) });
+  const jolt = interpolate(frame, [T.push + F(0.05), T.push + F(0.15), T.push + F(0.5)], [0, -90, 0], clamp);
+  const spread = interpolate(frame, [T.handIn, T.windup, T.push], [0, 1, 0.3], clamp);
+  const impact = interpolate(frame, [T.push + F(0.05), T.push + F(0.1), T.push + F(0.3)], [0, 1, 0], clamp);
+
+  let pose: Pose = "pointing"; // he points into the past and does not see the hand coming
   let face: Expression | undefined;
-  if (frame >= T.scrollStart && frame < T.scrollEnd) pose = "running";
+  if (frame >= T.push && frame < T.scrollEnd) {
+    pose = "shocked";
+    face = "shocked";
+  }
   if (frame >= T.scrollEnd) {
     pose = "shocked";
     face = "happy";
   }
 
-  const centuries = Array.from({ length: 21 }, (_, i) => i * 100).filter((y) => Math.abs(xOf(y) - 540) < 700);
+  // Century ticks from 100 AD to 2000 AD (there is no year 0).
+  const centuries = Array.from({ length: 20 }, (_, i) => (i + 1) * 100).filter((y) => Math.abs(xOf(y) - 540) < 700);
 
   return (
     <g>
@@ -204,8 +235,8 @@ const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }
         {/* Big year counter */}
         <text
           x={540}
-          y={930}
-          fontSize={140}
+          y={820}
+          fontSize={130}
           fill="#f2c12e"
           stroke={INK}
           strokeWidth={18}
@@ -217,8 +248,29 @@ const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }
       </g>
 
       <g transform={`translate(540 ${LINE_Y}) scale(${shrink}) translate(-540 ${-LINE_Y})`}>
-        <Tony pose={pose} expression={face} x={540} y={LINE_Y - 7 + drop} scale={1.6} facing="left" />
+        <g transform={`translate(${jolt} ${lift}) rotate(${spin} 540 ${BODY_Y})`}>
+          <Tony pose={pose} expression={face} x={540} y={LINE_Y - 7 + drop} scale={TONY_SCALE} facing="left" />
+        </g>
       </g>
+
+      {/* Comic impact burst where the hand hits him */}
+      {impact > 0 &&
+        [-60, -25, 10, 45].map((deg) => {
+          const r = (deg * Math.PI) / 180;
+          const cx = 580;
+          return (
+            <path
+              key={deg}
+              d={`M ${cx + Math.cos(r) * 90} ${BODY_Y + Math.sin(r) * 90} L ${cx + Math.cos(r) * 150} ${BODY_Y + Math.sin(r) * 150}`}
+              stroke="#f2c12e"
+              strokeWidth={12}
+              strokeLinecap="round"
+              opacity={impact}
+            />
+          );
+        })}
+
+      {frame >= T.handIn && handX < 1450 && <GiantHand x={handX} y={BODY_Y} scale={HAND_SCALE} spread={spread} />}
     </g>
   );
 };
