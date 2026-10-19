@@ -18,7 +18,19 @@ export type Pose = (typeof POSES)[number];
 export type Expression = (typeof EXPRESSIONS)[number];
 
 // Things a stickman can wear or carry. Tony's signature items come from this list.
-export type Accessory = "pillow" | "goggles" | "scarf" | "cap" | "backpack" | "curl" | "watch";
+export type Accessory =
+  | "pillow"
+  | "goggles"
+  | "scarf"
+  | "cap"
+  | "capBack"
+  | "bucketHat"
+  | "beanie"
+  | "headphones"
+  | "backpack"
+  | "satchel"
+  | "curl"
+  | "watch";
 
 // The face each pose gets when no expression is given.
 export const POSE_FACE: Record<Pose, Expression> = {
@@ -43,7 +55,8 @@ type Props = {
   seed?: number; // shifts the wobble so two stickmen never move in sync
   rim?: string; // light edge around the figure so he stays visible on dark backgrounds
   accessories?: Accessory[];
-  accent?: string; // color of scarf, cap and similar items
+  accent?: string; // color of headwear and scarf
+  accent2?: string; // color of bags and headphones
 };
 
 // Body measurements in stickman units (about 222 units tall at scale 1).
@@ -184,6 +197,7 @@ export const Stickman: React.FC<Props> = ({
   rim = "none",
   accessories = [],
   accent = "#e2483d",
+  accent2 = "#3f8f8a",
 }) => {
   const has = (item: Accessory) => accessories.includes(item);
   const frame = useCurrentFrame();
@@ -238,11 +252,26 @@ export const Stickman: React.FC<Props> = ({
           </filter>
         </defs>
       )}
-      {has("backpack") && <Backpack shoulder={{ x: shoulder.x, y: shoulder.y + dy }} t={t} color={color} />}
+      {has("backpack") && <Backpack shoulder={{ x: shoulder.x, y: shoulder.y + dy }} t={t} color={color} fill={accent2} />}
       <polyline points={toPoints(backLeg, dy)} {...line} />
       <polyline points={toPoints(frontLeg, dy)} {...line} />
       <polyline points={toPoints([hip, neck], dy)} {...line} />
+      {has("satchel") && (
+        <Satchel shoulder={{ x: shoulder.x, y: shoulder.y + dy }} hip={{ x: hip.x, y: hip.y + dy }} t={t} color={color} fill={accent2} />
+      )}
       {has("scarf") && <Scarf neck={{ x: neck.x, y: neck.y + dy }} t={t} color={color} accent={accent} />}
+      {has("headphones") && (
+        // Resting around the neck: the band hangs under the chin, round ear cups on the collarbones.
+        <g stroke={color} strokeLinejoin="round">
+          <path d={`M ${neck.x - 26} ${neck.y + dy + 12} Q ${neck.x} ${neck.y + dy + 40} ${neck.x + 26} ${neck.y + dy + 12}`} fill="none" strokeWidth={7} />
+          {[-26, 26].map((dx) => (
+            <g key={dx}>
+              <circle cx={neck.x + dx} cy={neck.y + dy + 12} r={13} fill={accent2} strokeWidth={5} />
+              <circle cx={neck.x + dx} cy={neck.y + dy + 12} r={5} fill={color} stroke="none" />
+            </g>
+          ))}
+        </g>
+      )}
       <g transform={`translate(${head.x} ${head.y + dy}) rotate(${a.lean + a.head})`}>
         <circle r={HEAD_R} fill={headFill} stroke={color} strokeWidth={STROKE} />
         <g transform={`scale(${FACE_SCALE})`}>
@@ -256,6 +285,27 @@ export const Stickman: React.FC<Props> = ({
             <path d="M -33 -14 Q -33 -48 0 -48 Q 33 -48 33 -14 Z" fill={accent} strokeWidth={6} />
             <path d="M 20 -15 L 58 -9" strokeWidth={10} />
             <circle cx={0} cy={-48} r={4} fill={accent} strokeWidth={3} />
+          </g>
+        )}
+        {has("capBack") && (
+          <g stroke={color} strokeLinejoin="round" strokeLinecap="round">
+            <path d="M -20 -15 L -58 -9" strokeWidth={10} />
+            <path d="M -33 -14 Q -33 -48 0 -48 Q 33 -48 33 -14 Z" fill={accent} strokeWidth={6} />
+            <circle cx={0} cy={-48} r={4} fill={accent} strokeWidth={3} />
+          </g>
+        )}
+        {has("bucketHat") && (
+          <g stroke={color} strokeLinejoin="round">
+            <ellipse cx={0} cy={-24} rx={50} ry={11} fill={accent} strokeWidth={6} />
+            <path d="M -27 -26 Q -27 -54 0 -54 Q 27 -54 27 -26 Z" fill={accent} strokeWidth={6} />
+            <path d="M -26 -32 L 26 -32" stroke={accent2} strokeWidth={6} />
+          </g>
+        )}
+        {has("beanie") && (
+          <g stroke={color} strokeLinejoin="round">
+            <path d="M -33 -18 Q -33 -56 0 -56 Q 33 -56 33 -18 Z" fill={accent} strokeWidth={6} />
+            <rect x={-37} y={-28} width={74} height={14} rx={6} fill={accent} strokeWidth={5} />
+            <circle cx={0} cy={-60} r={10} fill={POMPOM} strokeWidth={4} />
           </g>
         )}
         {has("goggles") && (
@@ -287,6 +337,7 @@ export const Stickman: React.FC<Props> = ({
 const STRAP = "#6b4a2b";
 const LENS = "#9fd8ef";
 const DEVICE_GLOW = "#5ee6f0"; // the light of Tony's time machine
+const POMPOM = "#fff4e0";
 
 // A scarf wrapped around the neck, two ends fluttering behind him.
 const Scarf: React.FC<{ neck: Point; t: number; color: string; accent: string }> = ({ neck, t, color, accent }) => {
@@ -309,7 +360,7 @@ const Scarf: React.FC<{ neck: Point; t: number; color: string; accent: string }>
 };
 
 // A small backpack with an antenna that glows: the time machine.
-const Backpack: React.FC<{ shoulder: Point; t: number; color: string }> = ({ shoulder, t, color }) => {
+const Backpack: React.FC<{ shoulder: Point; t: number; color: string; fill: string }> = ({ shoulder, t, color, fill }) => {
   const pulse = 0.55 + 0.45 * Math.sin(t * 2 * Math.PI * 1.2);
   const x = shoulder.x - 48;
   const y = shoulder.y + 2;
@@ -318,8 +369,30 @@ const Backpack: React.FC<{ shoulder: Point; t: number; color: string }> = ({ sho
       <path d={`M ${x + 8} ${y} L ${x - 8} ${y - 34}`} strokeWidth={5} />
       <circle cx={x - 10} cy={y - 38} r={14} fill={DEVICE_GLOW} opacity={0.35 * pulse} stroke="none" />
       <circle cx={x - 10} cy={y - 38} r={6} fill={DEVICE_GLOW} strokeWidth={3} />
-      <rect x={x} y={y} width={30} height={52} rx={8} fill="#3f8f8a" strokeWidth={5} />
+      <rect x={x} y={y} width={30} height={52} rx={8} fill={fill} strokeWidth={5} />
       <path d={`M ${x + 6} ${y + 18} L ${x + 24} ${y + 18}`} strokeWidth={3} />
+    </g>
+  );
+};
+
+// A bag on a strap across the body, with a glowing time device on the flap.
+const Satchel: React.FC<{ shoulder: Point; hip: Point; t: number; color: string; fill: string }> = ({
+  shoulder,
+  hip,
+  t,
+  color,
+  fill,
+}) => {
+  const pulse = 0.55 + 0.45 * Math.sin(t * 2 * Math.PI * 1.2);
+  const bx = hip.x - 50;
+  const by = hip.y - 18;
+  return (
+    <g stroke={color} strokeLinecap="round" strokeLinejoin="round">
+      <path d={`M ${shoulder.x + 14} ${shoulder.y - 6} L ${bx + 20} ${by + 4}`} stroke={STRAP} strokeWidth={6} />
+      <rect x={bx} y={by} width={38} height={32} rx={7} fill={fill} strokeWidth={5} />
+      <path d={`M ${bx} ${by + 12} L ${bx + 38} ${by + 12}`} strokeWidth={3} />
+      <circle cx={bx + 19} cy={by + 20} r={12} fill={DEVICE_GLOW} opacity={0.4 * pulse} stroke="none" />
+      <circle cx={bx + 19} cy={by + 20} r={5} fill={DEVICE_GLOW} strokeWidth={3} />
     </g>
   );
 };

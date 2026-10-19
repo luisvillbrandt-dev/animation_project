@@ -37,7 +37,7 @@ export const RemotionRoot: React.FC = () => {
           durationInFrames={FPS * 5}
         />
       ))}
-      {(["a", "b", "c"] as const).map((variant) => (
+      {(["a", "b", "c", "d", "e", "f"] as const).map((variant) => (
         <Composition
           key={variant}
           id={`TonyTest-${variant}`}
