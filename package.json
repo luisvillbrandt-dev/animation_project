@@ -1,0 +1,24 @@
+{
+  "name": "decisions-shorts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "History's Impossible Decisions: vertical stickman shorts built with Remotion",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "node -e \"console.log('render: not built yet')\"",
+    "voice": "node -e \"console.log('voice: not built yet')\"",
+    "captions": "node -e \"console.log('captions: not built yet')\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "typescript": "5.9.3"
+  }
+}
