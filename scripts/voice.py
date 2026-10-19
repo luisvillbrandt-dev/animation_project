@@ -19,6 +19,7 @@ Voices (the first letter is the accent: a = American, b = British; the second: m
   am_michael, am_adam, am_eric, am_liam, am_onyx, am_fenrir, am_puck, am_echo
   bm_george, bm_lewis, bm_daniel, bm_fable
   af_heart, af_bella, af_nicole, af_sarah, bf_emma, bf_isabella
+Blend two voices with "+", e.g. am_michael+am_onyx (works in voice.config.json too).
 """
 
 import argparse
@@ -77,9 +78,10 @@ class Speaker:
         lang = voice[0]  # "a" = American English, "b" = British English
         if lang not in self._pipelines:
             self._pipelines[lang] = self._pipeline_class(lang_code=lang, repo_id="hexgrad/Kokoro-82M")
+        # "am_michael+am_onyx" blends voices; Kokoro averages comma-separated voices.
         parts = [
             result.audio.cpu().numpy()
-            for result in self._pipelines[lang](text, voice=voice, speed=speed)
+            for result in self._pipelines[lang](text, voice=voice.replace("+", ","), speed=speed)
             if result.audio is not None
         ]
         if not parts:
