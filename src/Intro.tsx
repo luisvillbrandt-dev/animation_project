@@ -8,7 +8,7 @@ import { loadFont } from "@remotion/google-fonts/Montserrat";
 import { AbsoluteFill, Easing, Html5Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { Tony } from "./characters/Tony";
 import { INK, Stage, StreetVesuvius } from "./components/backgrounds/StreetVesuvius";
-import { GiantHand } from "./components/GiantHand";
+import { GiantFist } from "./components/GiantHand";
 import { Expression, Pose } from "./components/Stickman";
 import { FPS, HEIGHT, SAFE_TOP, WIDTH } from "./video";
 
@@ -32,7 +32,8 @@ const T = {
   land: F(5.05),
   tag: F(5.35),
 };
-const scrollStart = T.push + F(0.05);
+const HIT = T.push + 2; // the frame in which the fist reaches him
+const scrollStart = HIT;
 
 const NOW = 2026;
 const LINE_Y = 1330; // height of the timeline
@@ -149,11 +150,18 @@ const HookShot: React.FC<{ frame: number; stage: Stage }> = ({ frame, stage }) =
   );
 };
 
-// 3: the timeline. Older years lie to the left. Tony stands at today's year, a giant hand comes in
-// from the right and pushes him; he tumbles back along the timeline to the target year.
+// 3: the timeline. Older years lie to the left. Tony stands at today's year, a giant fist comes in
+// from the right and punches him away; he tumbles back along the timeline to the target year.
 const TONY_SCALE = 1.6;
 const BODY_Y = LINE_Y - 190; // middle of Tony's body on the timeline
-const HAND_SCALE = 1.25;
+const FIST_SCALE = 1.7;
+
+// An 8-point comic star for the moment of impact.
+const STAR = Array.from({ length: 16 }, (_, i) => {
+  const a = (i * Math.PI) / 8;
+  const r = i % 2 ? 0.45 : 1;
+  return `${(Math.cos(a) * r).toFixed(3)},${(Math.sin(a) * r).toFixed(3)}`;
+}).join(" ");
 
 const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }) => {
   const scroll = (f: number) =>
@@ -166,28 +174,30 @@ const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }
   const shrink = interpolate(frame, [T.dive, T.dive + F(0.25)], [1, 0], { ...clamp, easing: Easing.in(Easing.quad) });
 
   // Flight after the push: an arc over the line with two backflips, upright again on landing.
-  const p = interpolate(frame, [T.push, T.scrollEnd], [0, 1], clamp);
+  const p = interpolate(frame, [HIT, T.scrollEnd], [0, 1], clamp);
   const lift = -Math.sin(Math.PI * p) * 110;
   const spin = -720 * Easing.out(Easing.cubic)(p);
 
-  // The hand: slides in, pulls back, pushes through, then is left behind on the right.
-  // Fingertips are about 172 px left of handX, so handX 750 touches his back. The camera follows Tony,
-  // so right after the hit the hand falls back to the right instead of passing over him.
-  const handX =
+  // The fist: slides in, winds up far, punches, then is left behind on the right.
+  // The knuckles are about 156 px left of fistX, so fistX 736 hits his back. The camera follows Tony,
+  // so right after the hit the fist falls back to the right instead of passing over him.
+  const fistX =
     frame < T.windup
-      ? interpolate(frame, [T.handIn, T.windup], [1500, 790], { ...clamp, easing: Easing.out(Easing.cubic) })
+      ? interpolate(frame, [T.handIn, T.windup], [1500, 820], { ...clamp, easing: Easing.out(Easing.cubic) })
       : frame < T.push
-        ? interpolate(frame, [T.windup, T.push], [790, 860], { ...clamp, easing: Easing.out(Easing.quad) })
-        : frame < T.push + F(0.07)
-          ? interpolate(frame, [T.push, T.push + F(0.07)], [860, 745], { ...clamp, easing: Easing.in(Easing.quad) })
-          : interpolate(frame, [T.push + F(0.07), T.push + F(0.4)], [745, 1500], { ...clamp, easing: Easing.in(Easing.quad) });
-  const jolt = interpolate(frame, [T.push + F(0.05), T.push + F(0.15), T.push + F(0.5)], [0, -90, 0], clamp);
-  const spread = interpolate(frame, [T.handIn, T.windup, T.push], [0, 1, 0.3], clamp);
-  const impact = interpolate(frame, [T.push + F(0.05), T.push + F(0.1), T.push + F(0.3)], [0, 1, 0], clamp);
+        ? interpolate(frame, [T.windup, T.push], [820, 980], { ...clamp, easing: Easing.out(Easing.quad) })
+        : frame < HIT
+          ? interpolate(frame, [T.push, HIT], [980, 736], { ...clamp, easing: Easing.in(Easing.quad) })
+          : interpolate(frame, [HIT, HIT + F(0.3)], [736, 1500], { ...clamp, easing: Easing.in(Easing.quad) });
+  // Short offsets in whole frames (at 30 fps tiny second values would round to the same frame).
+  const jolt = interpolate(frame, [HIT, HIT + 2, HIT + 13], [0, -150, 0], clamp);
+  const impact = interpolate(frame, [HIT, HIT + 1, HIT + 5], [0, 1, 0], clamp);
+  // Short camera shake on the hit.
+  const shake = impact > 0 ? { x: Math.sin(frame * 2.7) * 16 * impact, y: Math.cos(frame * 3.1) * 12 * impact } : { x: 0, y: 0 };
 
-  let pose: Pose = "pointing"; // he points into the past and does not see the hand coming
+  let pose: Pose = "pointing"; // he points into the past and does not see the fist coming
   let face: Expression | undefined;
-  if (frame >= T.push && frame < T.scrollEnd) {
+  if (frame >= HIT && frame < T.scrollEnd) {
     pose = "shocked";
     face = "shocked";
   }
@@ -200,8 +210,8 @@ const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }
   const centuries = Array.from({ length: 20 }, (_, i) => (i + 1) * 100).filter((y) => Math.abs(xOf(y) - 540) < 700);
 
   return (
-    <g>
-      <rect width={WIDTH} height={HEIGHT} fill="url(#intro-void)" />
+    <g transform={`translate(${shake.x} ${shake.y})`}>
+      <rect x={-40} y={-40} width={WIDTH + 80} height={HEIGHT + 80} fill="url(#intro-void)" />
       {/* Speed streaks, stronger the faster the years go by */}
       {Array.from({ length: 16 }, (_, i) => {
         const y = 220 + ((i * 263) % 1500);
@@ -253,24 +263,15 @@ const TimelineShot: React.FC<{ frame: number; year: number }> = ({ frame, year }
         </g>
       </g>
 
-      {/* Comic impact burst where the hand hits him */}
-      {impact > 0 &&
-        [-60, -25, 10, 45].map((deg) => {
-          const r = (deg * Math.PI) / 180;
-          const cx = 580;
-          return (
-            <path
-              key={deg}
-              d={`M ${cx + Math.cos(r) * 90} ${BODY_Y + Math.sin(r) * 90} L ${cx + Math.cos(r) * 150} ${BODY_Y + Math.sin(r) * 150}`}
-              stroke="#f2c12e"
-              strokeWidth={12}
-              strokeLinecap="round"
-              opacity={impact}
-            />
-          );
-        })}
+      {frame >= T.handIn && fistX < 1450 && <GiantFist x={fistX} y={BODY_Y} scale={FIST_SCALE} />}
 
-      {frame >= T.handIn && handX < 1450 && <GiantHand x={handX} y={BODY_Y} scale={HAND_SCALE} spread={spread} />}
+      {/* Comic impact star where the fist hits him */}
+      {impact > 0 && (
+        <g transform={`translate(570 ${BODY_Y}) scale(${80 + 60 * impact}) rotate(${frame * 4})`} opacity={Math.min(1, impact * 2)}>
+          <polygon points={STAR} fill="#f2c12e" stroke={INK} strokeWidth={0.06} strokeLinejoin="round" />
+          <polygon points={STAR} fill="#ffffff" transform="scale(0.45)" />
+        </g>
+      )}
     </g>
   );
 };
