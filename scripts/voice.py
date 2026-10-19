@@ -5,7 +5,8 @@ Usage (from the project folder):
   npm run voice -- <episode-id> --voice bm_george       try another voice once
   npm run voice -- <episode-id> --speed 0.85            try another speed once
   npm run voice -- <episode-id> --samples am_michael,am_adam,bm_george
-                                                        one comparison file per voice, nothing else
+                                                        one comparison file per voice and speed,
+                                                        e.g. voice/samples/am_adam_speed0.9.wav
 
 Writes:
   episodes/<id>/voice/line-NN.wav   one file per script line (NN = line number in script.txt)
@@ -137,7 +138,7 @@ def main():
         for sample_voice in [v.strip() for v in args.samples.split(",") if v.strip()]:
             clips = [speaker.say(text, sample_voice, speed) for _, text, _ in lines]
             audio, _ = join(clips, lines, config)
-            out = samples_dir / f"{sample_voice}.wav"
+            out = samples_dir / f"{sample_voice}_speed{speed}.wav"
             sf.write(out, audio, SAMPLE_RATE)
             print(f"{sample_voice:<12} {len(audio) / SAMPLE_RATE:5.1f} s  -> {out.relative_to(ROOT)}")
         return

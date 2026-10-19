@@ -379,8 +379,9 @@ const Backpack: React.FC<{ shoulder: Point; t: number; color: string; fill: stri
   );
 };
 
-// A messenger bag on a strap across the chest, resting against the hip.
-// The glowing clasp on the flap is Tony's time device.
+// A messenger bag hanging from the shoulder, resting against the hip.
+// The strap runs down on the bag's own side in a soft curve; a strap across the chest would read
+// like an extra limb on a stick figure. The glowing clasp on the flap is Tony's time device.
 const Satchel: React.FC<{ shoulder: Point; hip: Point; t: number; color: string; fill: string }> = ({
   shoulder,
   hip,
@@ -394,11 +395,11 @@ const Satchel: React.FC<{ shoulder: Point; hip: Point; t: number; color: string;
   const bx = hip.x - 38; // overlaps the body line, so it hangs on him instead of next to him
   const by = hip.y - 20;
   const swing = 4 * Math.sin(t * 2 * Math.PI * 0.6);
-  const strap = `M ${shoulder.x + 12} ${shoulder.y - 4} L ${bx + 8} ${by + 4}`;
+  const strap = `M ${shoulder.x - 2} ${shoulder.y - 2} Q ${shoulder.x - 26} ${(shoulder.y + by) / 2} ${bx + 10} ${by + 3}`;
   return (
     <g strokeLinecap="round" strokeLinejoin="round">
-      <path d={strap} stroke={color} strokeWidth={13} />
-      <path d={strap} stroke={fill} strokeWidth={6} />
+      <path d={strap} fill="none" stroke={color} strokeWidth={11} />
+      <path d={strap} fill="none" stroke={fill} strokeWidth={5} />
       <g stroke={color} transform={`rotate(${swing} ${bx + 8} ${by})`}>
         <rect x={bx} y={by} width={w} height={h} rx={9} fill={fill} strokeWidth={5} />
         <path d={`M ${bx} ${by + 3} L ${bx + w} ${by + 3} L ${bx + w} ${by + 17} Q ${bx + w / 2} ${by + 27} ${bx} ${by + 17} Z`} fill={fill} strokeWidth={5} />
