@@ -7,12 +7,14 @@
     "dev": "remotion studio",
     "render": "node -e \"console.log('render: not built yet')\"",
     "voice": "node scripts/py.mjs scripts/voice.py",
-    "captions": "node -e \"console.log('captions: not built yet')\"",
+    "captions": "node scripts/captions.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@remotion/captions": "4.0.536",
     "@remotion/cli": "4.0.536",
     "@remotion/google-fonts": "4.0.536",
+    "@remotion/install-whisper-cpp": "4.0.536",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "remotion": "4.0.536"

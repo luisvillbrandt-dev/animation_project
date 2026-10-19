@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { EmptyCanvas } from "./EmptyCanvas";
 import { StickmanTest } from "./StickmanTest";
 import { StyleTest } from "./StyleTest";
+import { CaptionsTest, loadCaptionsTest } from "./CaptionsTest";
 import { INTRO_FRAMES, Intro } from "./Intro";
 import { TonyPoses } from "./TonyPoses";
 import { TonyTest } from "./TonyTest";
@@ -59,6 +60,16 @@ export const RemotionRoot: React.FC = () => {
         height={HEIGHT}
         fps={FPS}
         durationInFrames={INTRO_FRAMES}
+      />
+      <Composition
+        id="CaptionsTest"
+        component={CaptionsTest}
+        defaultProps={{ episode: "ep01-pompeii-part1", captions: [] }}
+        calculateMetadata={loadCaptionsTest}
+        width={WIDTH}
+        height={HEIGHT}
+        fps={FPS}
+        durationInFrames={FPS * 10}
       />
       <Composition
         id="TonyPoses"

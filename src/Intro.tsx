@@ -64,7 +64,7 @@ export const Intro: React.FC<Props> = ({ place, year, stage }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK }}>
-      <Html5Audio src={staticFile("intro-test-voice.wav")} />
+      <Html5Audio src={staticFile("intro-test/voice/voice.wav")} />
       <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} width={WIDTH} height={HEIGHT}>
         <defs>
           <filter id="intro-blur" x="-5%" y="-5%" width="110%" height="110%">

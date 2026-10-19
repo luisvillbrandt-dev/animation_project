@@ -9,3 +9,4 @@ episodes/*/voice/
 __pycache__/
 out/review/
 public/*.wav
+.whisper/

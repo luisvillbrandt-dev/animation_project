@@ -1,0 +1,1549 @@
+[
+  {
+    "text": " This",
+    "startMs": 190,
+    "endMs": 360,
+    "timestampMs": 190,
+    "confidence": 0.890625
+  },
+  {
+    "text": " is",
+    "startMs": 360,
+    "endMs": 560,
+    "timestampMs": 360,
+    "confidence": 0.997166
+  },
+  {
+    "text": " Tony!",
+    "startMs": 560,
+    "endMs": 1350,
+    "timestampMs": 560,
+    "confidence": 0.845071
+  },
+  {
+    "text": " Today,",
+    "startMs": 1350,
+    "endMs": 1750,
+    "timestampMs": 1350,
+    "confidence": 0.87758
+  },
+  {
+    "text": " he",
+    "startMs": 1750,
+    "endMs": 1910,
+    "timestampMs": 1750,
+    "confidence": 0.984254
+  },
+  {
+    "text": " travels",
+    "startMs": 1910,
+    "endMs": 2460,
+    "timestampMs": 1910,
+    "confidence": 0.998306
+  },
+  {
+    "text": " to",
+    "startMs": 2460,
+    "endMs": 2640,
+    "timestampMs": 2460,
+    "confidence": 0.992881
+  },
+  {
+    "text": " ancient",
+    "startMs": 2640,
+    "endMs": 3170,
+    "timestampMs": 2640,
+    "confidence": 0.888722
+  },
+  {
+    "text": " Pompeii!",
+    "startMs": 3170,
+    "endMs": 3519,
+    "timestampMs": 3170,
+    "confidence": 0.967967
+  },
+  {
+    "text": " By",
+    "startMs": 4419,
+    "endMs": 4460,
+    "timestampMs": 4419,
+    "confidence": 0.9874
+  },
+  {
+    "text": " tomorrow",
+    "startMs": 4460,
+    "endMs": 4990,
+    "timestampMs": 4460,
+    "confidence": 0.997322
+  },
+  {
+    "text": " morning,",
+    "startMs": 4990,
+    "endMs": 5880,
+    "timestampMs": 4990,
+    "confidence": 0.998881
+  },
+  {
+    "text": " this",
+    "startMs": 5880,
+    "endMs": 5960,
+    "timestampMs": 5880,
+    "confidence": 0.98714
+  },
+  {
+    "text": " whole",
+    "startMs": 5960,
+    "endMs": 6310,
+    "timestampMs": 5960,
+    "confidence": 0.989617
+  },
+  {
+    "text": " city",
+    "startMs": 6310,
+    "endMs": 6590,
+    "timestampMs": 6310,
+    "confidence": 0.996411
+  },
+  {
+    "text": " will",
+    "startMs": 6590,
+    "endMs": 6870,
+    "timestampMs": 6590,
+    "confidence": 0.973081
+  },
+  {
+    "text": " be",
+    "startMs": 6870,
+    "endMs": 7010,
+    "timestampMs": 6870,
+    "confidence": 0.998154
+  },
+  {
+    "text": " buried.",
+    "startMs": 7010,
+    "endMs": 7458,
+    "timestampMs": 7010,
+    "confidence": 0.99488
+  },
+  {
+    "text": " Tony",
+    "startMs": 7808,
+    "endMs": 8050,
+    "timestampMs": 7808,
+    "confidence": 0.978751
+  },
+  {
+    "text": " is",
+    "startMs": 8050,
+    "endMs": 8220,
+    "timestampMs": 8050,
+    "confidence": 0.99787
+  },
+  {
+    "text": " a",
+    "startMs": 8220,
+    "endMs": 8320,
+    "timestampMs": 8220,
+    "confidence": 0.995304
+  },
+  {
+    "text": " baker",
+    "startMs": 8320,
+    "endMs": 8780,
+    "timestampMs": 8320,
+    "confidence": 0.983893
+  },
+  {
+    "text": " now.",
+    "startMs": 8780,
+    "endMs": 9540,
+    "timestampMs": 8780,
+    "confidence": 0.985571
+  },
+  {
+    "text": " It's",
+    "startMs": 9540,
+    "endMs": 9750,
+    "timestampMs": 9540,
+    "confidence": 0.914154
+  },
+  {
+    "text": " the",
+    "startMs": 9750,
+    "endMs": 9990,
+    "timestampMs": 9750,
+    "confidence": 0.996031
+  },
+  {
+    "text": " year",
+    "startMs": 9990,
+    "endMs": 10350,
+    "timestampMs": 9990,
+    "confidence": 0.980281
+  },
+  {
+    "text": " 79",
+    "startMs": 10350,
+    "endMs": 10890,
+    "timestampMs": 10350,
+    "confidence": 0.942712
+  },
+  {
+    "text": " AD.",
+    "startMs": 10890,
+    "endMs": 11460,
+    "timestampMs": 10890,
+    "confidence": 0.598363
+  },
+  {
+    "text": " A",
+    "startMs": 11460,
+    "endMs": 11570,
+    "timestampMs": 11460,
+    "confidence": 0.626786
+  },
+  {
+    "text": " normal",
+    "startMs": 11570,
+    "endMs": 12080,
+    "timestampMs": 11570,
+    "confidence": 0.99147
+  },
+  {
+    "text": " day.",
+    "startMs": 12080,
+    "endMs": 12517,
+    "timestampMs": 12080,
+    "confidence": 0.997434
+  },
+  {
+    "text": " The",
+    "startMs": 12867,
+    "endMs": 12970,
+    "timestampMs": 12867,
+    "confidence": 0.997004
+  },
+  {
+    "text": " oven",
+    "startMs": 12970,
+    "endMs": 13300,
+    "timestampMs": 12970,
+    "confidence": 0.99814
+  },
+  {
+    "text": " is",
+    "startMs": 13300,
+    "endMs": 13480,
+    "timestampMs": 13300,
+    "confidence": 0.999474
+  },
+  {
+    "text": " hot.",
+    "startMs": 13480,
+    "endMs": 14210,
+    "timestampMs": 13480,
+    "confidence": 0.999834
+  },
+  {
+    "text": " The",
+    "startMs": 14210,
+    "endMs": 14230,
+    "timestampMs": 14210,
+    "confidence": 0.993259
+  },
+  {
+    "text": " bread",
+    "startMs": 14230,
+    "endMs": 14630,
+    "timestampMs": 14230,
+    "confidence": 0.996679
+  },
+  {
+    "text": " is",
+    "startMs": 14630,
+    "endMs": 14790,
+    "timestampMs": 14630,
+    "confidence": 0.999117
+  },
+  {
+    "text": " almost",
+    "startMs": 14790,
+    "endMs": 15300,
+    "timestampMs": 14790,
+    "confidence": 0.9989
+  },
+  {
+    "text": " ready.",
+    "startMs": 15300,
+    "endMs": 15734,
+    "timestampMs": 15300,
+    "confidence": 0.997955
+  },
+  {
+    "text": " For",
+    "startMs": 16084,
+    "endMs": 16210,
+    "timestampMs": 16084,
+    "confidence": 0.999174
+  },
+  {
+    "text": " days,",
+    "startMs": 16210,
+    "endMs": 16620,
+    "timestampMs": 16210,
+    "confidence": 0.998551
+  },
+  {
+    "text": " the",
+    "startMs": 16620,
+    "endMs": 16970,
+    "timestampMs": 16620,
+    "confidence": 0.998329
+  },
+  {
+    "text": " ground",
+    "startMs": 16970,
+    "endMs": 17260,
+    "timestampMs": 16970,
+    "confidence": 0.998866
+  },
+  {
+    "text": " has",
+    "startMs": 17260,
+    "endMs": 17460,
+    "timestampMs": 17260,
+    "confidence": 0.998182
+  },
+  {
+    "text": " been",
+    "startMs": 17460,
+    "endMs": 17750,
+    "timestampMs": 17460,
+    "confidence": 0.999335
+  },
+  {
+    "text": " shaking",
+    "startMs": 17750,
+    "endMs": 18240,
+    "timestampMs": 17750,
+    "confidence": 0.998433
+  },
+  {
+    "text": " a",
+    "startMs": 18240,
+    "endMs": 18310,
+    "timestampMs": 18240,
+    "confidence": 0.997714
+  },
+  {
+    "text": " little.",
+    "startMs": 18310,
+    "endMs": 18716,
+    "timestampMs": 18310,
+    "confidence": 0.992481
+  },
+  {
+    "text": " Just",
+    "startMs": 19066,
+    "endMs": 19340,
+    "timestampMs": 19066,
+    "confidence": 0.998742
+  },
+  {
+    "text": " after",
+    "startMs": 19340,
+    "endMs": 19730,
+    "timestampMs": 19340,
+    "confidence": 0.99935
+  },
+  {
+    "text": " midday,",
+    "startMs": 19730,
+    "endMs": 20420,
+    "timestampMs": 19730,
+    "confidence": 0.97794
+  },
+  {
+    "text": " Vesuvius",
+    "startMs": 20420,
+    "endMs": 21100,
+    "timestampMs": 20420,
+    "confidence": 0.947111
+  },
+  {
+    "text": " explodes.",
+    "startMs": 21100,
+    "endMs": 21836,
+    "timestampMs": 21100,
+    "confidence": 0.998828
+  },
+  {
+    "text": " A",
+    "startMs": 22186,
+    "endMs": 22280,
+    "timestampMs": 22186,
+    "confidence": 0.998551
+  },
+  {
+    "text": " column",
+    "startMs": 22280,
+    "endMs": 22600,
+    "timestampMs": 22280,
+    "confidence": 0.995458
+  },
+  {
+    "text": " of",
+    "startMs": 22600,
+    "endMs": 22740,
+    "timestampMs": 22600,
+    "confidence": 0.9991
+  },
+  {
+    "text": " ash",
+    "startMs": 22740,
+    "endMs": 22970,
+    "timestampMs": 22740,
+    "confidence": 0.999119
+  },
+  {
+    "text": " and",
+    "startMs": 22970,
+    "endMs": 23190,
+    "timestampMs": 22970,
+    "confidence": 0.965736
+  },
+  {
+    "text": " smoke",
+    "startMs": 23190,
+    "endMs": 23570,
+    "timestampMs": 23190,
+    "confidence": 0.991326
+  },
+  {
+    "text": " shoots",
+    "startMs": 23570,
+    "endMs": 24030,
+    "timestampMs": 23570,
+    "confidence": 0.991811
+  },
+  {
+    "text": " miles",
+    "startMs": 24030,
+    "endMs": 24400,
+    "timestampMs": 24030,
+    "confidence": 0.978408
+  },
+  {
+    "text": " into",
+    "startMs": 24400,
+    "endMs": 24700,
+    "timestampMs": 24400,
+    "confidence": 0.995463
+  },
+  {
+    "text": " the",
+    "startMs": 24700,
+    "endMs": 24920,
+    "timestampMs": 24700,
+    "confidence": 0.99863
+  },
+  {
+    "text": " sky.",
+    "startMs": 24920,
+    "endMs": 25211,
+    "timestampMs": 24920,
+    "confidence": 0.998925
+  },
+  {
+    "text": " It",
+    "startMs": 25561,
+    "endMs": 25590,
+    "timestampMs": 25561,
+    "confidence": 0.818266
+  },
+  {
+    "text": " spreads",
+    "startMs": 25590,
+    "endMs": 26110,
+    "timestampMs": 25590,
+    "confidence": 0.998879
+  },
+  {
+    "text": " out",
+    "startMs": 26110,
+    "endMs": 26330,
+    "timestampMs": 26110,
+    "confidence": 0.999676
+  },
+  {
+    "text": " like",
+    "startMs": 26330,
+    "endMs": 26630,
+    "timestampMs": 26330,
+    "confidence": 0.997044
+  },
+  {
+    "text": " a",
+    "startMs": 26630,
+    "endMs": 26700,
+    "timestampMs": 26630,
+    "confidence": 0.998546
+  },
+  {
+    "text": " giant",
+    "startMs": 26700,
+    "endMs": 27070,
+    "timestampMs": 26700,
+    "confidence": 0.997109
+  },
+  {
+    "text": " pine",
+    "startMs": 27070,
+    "endMs": 27370,
+    "timestampMs": 27070,
+    "confidence": 0.993701
+  },
+  {
+    "text": " tree.",
+    "startMs": 27370,
+    "endMs": 27683,
+    "timestampMs": 27370,
+    "confidence": 0.997745
+  },
+  {
+    "text": " No",
+    "startMs": 28060,
+    "endMs": 28080,
+    "timestampMs": 28060,
+    "confidence": 0.995205
+  },
+  {
+    "text": " one",
+    "startMs": 28080,
+    "endMs": 28320,
+    "timestampMs": 28080,
+    "confidence": 0.988953
+  },
+  {
+    "text": " here",
+    "startMs": 28320,
+    "endMs": 28640,
+    "timestampMs": 28320,
+    "confidence": 0.998525
+  },
+  {
+    "text": " saw",
+    "startMs": 28640,
+    "endMs": 28880,
+    "timestampMs": 28640,
+    "confidence": 0.999769
+  },
+  {
+    "text": " this",
+    "startMs": 28880,
+    "endMs": 29250,
+    "timestampMs": 28880,
+    "confidence": 0.998437
+  },
+  {
+    "text": " coming.",
+    "startMs": 29250,
+    "endMs": 29632,
+    "timestampMs": 29250,
+    "confidence": 0.999115
+  },
+  {
+    "text": " Soon",
+    "startMs": 30040,
+    "endMs": 30150,
+    "timestampMs": 30040,
+    "confidence": 0.730986
+  },
+  {
+    "text": " after,",
+    "startMs": 30150,
+    "endMs": 30560,
+    "timestampMs": 30150,
+    "confidence": 0.988033
+  },
+  {
+    "text": " small",
+    "startMs": 30560,
+    "endMs": 30880,
+    "timestampMs": 30560,
+    "confidence": 0.911956
+  },
+  {
+    "text": " white",
+    "startMs": 30880,
+    "endMs": 31200,
+    "timestampMs": 30880,
+    "confidence": 0.885748
+  },
+  {
+    "text": " stones",
+    "startMs": 31200,
+    "endMs": 31600,
+    "timestampMs": 31200,
+    "confidence": 0.98952
+  },
+  {
+    "text": " start",
+    "startMs": 31600,
+    "endMs": 32120,
+    "timestampMs": 31600,
+    "confidence": 0.954986
+  },
+  {
+    "text": " falling.",
+    "startMs": 32120,
+    "endMs": 32521,
+    "timestampMs": 32120,
+    "confidence": 0.976235
+  },
+  {
+    "text": " Pumice.",
+    "startMs": 32871,
+    "endMs": 33370,
+    "timestampMs": 32871,
+    "confidence": 0.692073
+  },
+  {
+    "text": " Light.",
+    "startMs": 33370,
+    "endMs": 33870,
+    "timestampMs": 33370,
+    "confidence": 0.996145
+  },
+  {
+    "text": " Not",
+    "startMs": 33870,
+    "endMs": 34090,
+    "timestampMs": 33870,
+    "confidence": 0.996803
+  },
+  {
+    "text": " dangerous,",
+    "startMs": 34090,
+    "endMs": 34890,
+    "timestampMs": 34090,
+    "confidence": 0.999514
+  },
+  {
+    "text": " at",
+    "startMs": 34890,
+    "endMs": 34900,
+    "timestampMs": 34890,
+    "confidence": 0.988976
+  },
+  {
+    "text": " first.",
+    "startMs": 34900,
+    "endMs": 35303,
+    "timestampMs": 34900,
+    "confidence": 0.999354
+  },
+  {
+    "text": " They",
+    "startMs": 35680,
+    "endMs": 35760,
+    "timestampMs": 35680,
+    "confidence": 0.661463
+  },
+  {
+    "text": " rattle",
+    "startMs": 35760,
+    "endMs": 36110,
+    "timestampMs": 35760,
+    "confidence": 0.962427
+  },
+  {
+    "text": " on",
+    "startMs": 36110,
+    "endMs": 36230,
+    "timestampMs": 36110,
+    "confidence": 0.976867
+  },
+  {
+    "text": " the",
+    "startMs": 36230,
+    "endMs": 36410,
+    "timestampMs": 36230,
+    "confidence": 0.995834
+  },
+  {
+    "text": " roof",
+    "startMs": 36410,
+    "endMs": 36650,
+    "timestampMs": 36410,
+    "confidence": 0.975258
+  },
+  {
+    "text": " tiles",
+    "startMs": 36650,
+    "endMs": 36960,
+    "timestampMs": 36650,
+    "confidence": 0.970907
+  },
+  {
+    "text": " like",
+    "startMs": 36960,
+    "endMs": 37300,
+    "timestampMs": 36960,
+    "confidence": 0.970001
+  },
+  {
+    "text": " hail.",
+    "startMs": 37300,
+    "endMs": 37698,
+    "timestampMs": 37300,
+    "confidence": 0.943648
+  },
+  {
+    "text": " The",
+    "startMs": 38048,
+    "endMs": 38160,
+    "timestampMs": 38048,
+    "confidence": 0.998967
+  },
+  {
+    "text": " sky",
+    "startMs": 38160,
+    "endMs": 38400,
+    "timestampMs": 38160,
+    "confidence": 0.999211
+  },
+  {
+    "text": " turns",
+    "startMs": 38400,
+    "endMs": 38800,
+    "timestampMs": 38400,
+    "confidence": 0.998932
+  },
+  {
+    "text": " grey.",
+    "startMs": 38800,
+    "endMs": 39510,
+    "timestampMs": 38800,
+    "confidence": 0.690259
+  },
+  {
+    "text": " The",
+    "startMs": 39510,
+    "endMs": 39720,
+    "timestampMs": 39510,
+    "confidence": 0.991681
+  },
+  {
+    "text": " afternoon",
+    "startMs": 39720,
+    "endMs": 40300,
+    "timestampMs": 39720,
+    "confidence": 0.997864
+  },
+  {
+    "text": " feels",
+    "startMs": 40300,
+    "endMs": 40700,
+    "timestampMs": 40300,
+    "confidence": 0.996278
+  },
+  {
+    "text": " like",
+    "startMs": 40700,
+    "endMs": 41020,
+    "timestampMs": 40700,
+    "confidence": 0.998671
+  },
+  {
+    "text": " evening.",
+    "startMs": 41020,
+    "endMs": 41649,
+    "timestampMs": 41020,
+    "confidence": 0.998735
+  },
+  {
+    "text": " His",
+    "startMs": 41999,
+    "endMs": 42060,
+    "timestampMs": 41999,
+    "confidence": 0.999058
+  },
+  {
+    "text": " neighbors",
+    "startMs": 42060,
+    "endMs": 42610,
+    "timestampMs": 42060,
+    "confidence": 0.959078
+  },
+  {
+    "text": " are",
+    "startMs": 42610,
+    "endMs": 42810,
+    "timestampMs": 42610,
+    "confidence": 0.999363
+  },
+  {
+    "text": " already",
+    "startMs": 42810,
+    "endMs": 43270,
+    "timestampMs": 42810,
+    "confidence": 0.974983
+  },
+  {
+    "text": " running",
+    "startMs": 43270,
+    "endMs": 43810,
+    "timestampMs": 43270,
+    "confidence": 0.99962
+  },
+  {
+    "text": " for",
+    "startMs": 43810,
+    "endMs": 43920,
+    "timestampMs": 43810,
+    "confidence": 0.999314
+  },
+  {
+    "text": " the",
+    "startMs": 43920,
+    "endMs": 44110,
+    "timestampMs": 43920,
+    "confidence": 0.993519
+  },
+  {
+    "text": " city",
+    "startMs": 44110,
+    "endMs": 44370,
+    "timestampMs": 44110,
+    "confidence": 0.972651
+  },
+  {
+    "text": " gates.",
+    "startMs": 44370,
+    "endMs": 44746,
+    "timestampMs": 44370,
+    "confidence": 0.992238
+  },
+  {
+    "text": " His",
+    "startMs": 45096,
+    "endMs": 45150,
+    "timestampMs": 45096,
+    "confidence": 0.998241
+  },
+  {
+    "text": " wife",
+    "startMs": 45150,
+    "endMs": 45390,
+    "timestampMs": 45150,
+    "confidence": 0.999689
+  },
+  {
+    "text": " is",
+    "startMs": 45390,
+    "endMs": 45510,
+    "timestampMs": 45390,
+    "confidence": 0.999432
+  },
+  {
+    "text": " holding",
+    "startMs": 45510,
+    "endMs": 45940,
+    "timestampMs": 45510,
+    "confidence": 0.999641
+  },
+  {
+    "text": " their",
+    "startMs": 45940,
+    "endMs": 46250,
+    "timestampMs": 45940,
+    "confidence": 0.997995
+  },
+  {
+    "text": " daughter.",
+    "startMs": 46250,
+    "endMs": 47140,
+    "timestampMs": 46250,
+    "confidence": 0.999537
+  },
+  {
+    "text": " They're",
+    "startMs": 47140,
+    "endMs": 47290,
+    "timestampMs": 47140,
+    "confidence": 0.983022
+  },
+  {
+    "text": " waiting",
+    "startMs": 47290,
+    "endMs": 47630,
+    "timestampMs": 47290,
+    "confidence": 0.998574
+  },
+  {
+    "text": " for",
+    "startMs": 47630,
+    "endMs": 47820,
+    "timestampMs": 47630,
+    "confidence": 0.999394
+  },
+  {
+    "text": " a",
+    "startMs": 47820,
+    "endMs": 47820,
+    "timestampMs": 47820,
+    "confidence": 0.998879
+  },
+  {
+    "text": " decision.",
+    "startMs": 47820,
+    "endMs": 48400,
+    "timestampMs": 47820,
+    "confidence": 0.999228
+  },
+  {
+    "text": " For",
+    "startMs": 49479,
+    "endMs": 49479,
+    "timestampMs": 49479,
+    "confidence": 0.998757
+  },
+  {
+    "text": " now,",
+    "startMs": 49479,
+    "endMs": 49560,
+    "timestampMs": 49479,
+    "confidence": 0.999424
+  },
+  {
+    "text": " inside",
+    "startMs": 49560,
+    "endMs": 49610,
+    "timestampMs": 49560,
+    "confidence": 0.998997
+  },
+  {
+    "text": " the",
+    "startMs": 49610,
+    "endMs": 49870,
+    "timestampMs": 49610,
+    "confidence": 0.998875
+  },
+  {
+    "text": " house,",
+    "startMs": 49870,
+    "endMs": 50470,
+    "timestampMs": 49870,
+    "confidence": 0.997788
+  },
+  {
+    "text": " they're",
+    "startMs": 50470,
+    "endMs": 51250,
+    "timestampMs": 50470,
+    "confidence": 0.995173
+  },
+  {
+    "text": " safe",
+    "startMs": 51250,
+    "endMs": 51430,
+    "timestampMs": 51250,
+    "confidence": 0.998967
+  },
+  {
+    "text": " from",
+    "startMs": 51430,
+    "endMs": 51820,
+    "timestampMs": 51430,
+    "confidence": 0.999096
+  },
+  {
+    "text": " the",
+    "startMs": 51820,
+    "endMs": 52040,
+    "timestampMs": 51820,
+    "confidence": 0.997234
+  },
+  {
+    "text": " stones.",
+    "startMs": 52040,
+    "endMs": 52624,
+    "timestampMs": 52040,
+    "confidence": 0.994383
+  },
+  {
+    "text": " The",
+    "startMs": 52974,
+    "endMs": 53080,
+    "timestampMs": 52974,
+    "confidence": 0.967979
+  },
+  {
+    "text": " walls",
+    "startMs": 53080,
+    "endMs": 53420,
+    "timestampMs": 53080,
+    "confidence": 0.999508
+  },
+  {
+    "text": " are",
+    "startMs": 53420,
+    "endMs": 53620,
+    "timestampMs": 53420,
+    "confidence": 0.999672
+  },
+  {
+    "text": " thick.",
+    "startMs": 53620,
+    "endMs": 54300,
+    "timestampMs": 53620,
+    "confidence": 0.998437
+  },
+  {
+    "text": " The",
+    "startMs": 54300,
+    "endMs": 54360,
+    "timestampMs": 54300,
+    "confidence": 0.993498
+  },
+  {
+    "text": " doors",
+    "startMs": 54360,
+    "endMs": 54700,
+    "timestampMs": 54360,
+    "confidence": 0.999209
+  },
+  {
+    "text": " are",
+    "startMs": 54700,
+    "endMs": 54900,
+    "timestampMs": 54700,
+    "confidence": 0.999443
+  },
+  {
+    "text": " strong.",
+    "startMs": 54900,
+    "endMs": 55425,
+    "timestampMs": 54900,
+    "confidence": 0.999628
+  },
+  {
+    "text": " But",
+    "startMs": 55800,
+    "endMs": 55820,
+    "timestampMs": 55800,
+    "confidence": 0.786844
+  },
+  {
+    "text": " the",
+    "startMs": 55820,
+    "endMs": 56040,
+    "timestampMs": 55820,
+    "confidence": 0.989791
+  },
+  {
+    "text": " stones",
+    "startMs": 56040,
+    "endMs": 56480,
+    "timestampMs": 56040,
+    "confidence": 0.998511
+  },
+  {
+    "text": " keep",
+    "startMs": 56480,
+    "endMs": 56820,
+    "timestampMs": 56480,
+    "confidence": 0.99556
+  },
+  {
+    "text": " coming.",
+    "startMs": 56820,
+    "endMs": 57250,
+    "timestampMs": 56820,
+    "confidence": 0.994958
+  },
+  {
+    "text": " They",
+    "startMs": 57640,
+    "endMs": 57810,
+    "timestampMs": 57640,
+    "confidence": 0.996919
+  },
+  {
+    "text": " pile",
+    "startMs": 57810,
+    "endMs": 58120,
+    "timestampMs": 57810,
+    "confidence": 0.998146
+  },
+  {
+    "text": " up",
+    "startMs": 58120,
+    "endMs": 58290,
+    "timestampMs": 58120,
+    "confidence": 0.995756
+  },
+  {
+    "text": " on",
+    "startMs": 58290,
+    "endMs": 58460,
+    "timestampMs": 58290,
+    "confidence": 0.985737
+  },
+  {
+    "text": " the",
+    "startMs": 58460,
+    "endMs": 58700,
+    "timestampMs": 58460,
+    "confidence": 0.998839
+  },
+  {
+    "text": " roof.",
+    "startMs": 58700,
+    "endMs": 59220,
+    "timestampMs": 58700,
+    "confidence": 0.998967
+  },
+  {
+    "text": " Hour",
+    "startMs": 59220,
+    "endMs": 59560,
+    "timestampMs": 59220,
+    "confidence": 0.984526
+  },
+  {
+    "text": " after",
+    "startMs": 59560,
+    "endMs": 59990,
+    "timestampMs": 59560,
+    "confidence": 0.993995
+  },
+  {
+    "text": " hour.",
+    "startMs": 59990,
+    "endMs": 60297,
+    "timestampMs": 59990,
+    "confidence": 0.998729
+  },
+  {
+    "text": " Outside,",
+    "startMs": 60647,
+    "endMs": 61230,
+    "timestampMs": 60647,
+    "confidence": 0.99608
+  },
+  {
+    "text": " the",
+    "startMs": 61230,
+    "endMs": 61420,
+    "timestampMs": 61230,
+    "confidence": 0.99862
+  },
+  {
+    "text": " stones",
+    "startMs": 61420,
+    "endMs": 61810,
+    "timestampMs": 61420,
+    "confidence": 0.999493
+  },
+  {
+    "text": " are",
+    "startMs": 61810,
+    "endMs": 62000,
+    "timestampMs": 61810,
+    "confidence": 0.998098
+  },
+  {
+    "text": " already",
+    "startMs": 62000,
+    "endMs": 62460,
+    "timestampMs": 62000,
+    "confidence": 0.99556
+  },
+  {
+    "text": " knee-deep.",
+    "startMs": 62460,
+    "endMs": 63034,
+    "timestampMs": 62460,
+    "confidence": 0.939005
+  },
+  {
+    "text": " In",
+    "startMs": 63384,
+    "endMs": 63420,
+    "timestampMs": 63384,
+    "confidence": 0.999108
+  },
+  {
+    "text": " the",
+    "startMs": 63420,
+    "endMs": 63610,
+    "timestampMs": 63420,
+    "confidence": 0.999165
+  },
+  {
+    "text": " street,",
+    "startMs": 63610,
+    "endMs": 64170,
+    "timestampMs": 63610,
+    "confidence": 0.991194
+  },
+  {
+    "text": " people",
+    "startMs": 64170,
+    "endMs": 64550,
+    "timestampMs": 64170,
+    "confidence": 0.997059
+  },
+  {
+    "text": " tie",
+    "startMs": 64550,
+    "endMs": 64740,
+    "timestampMs": 64550,
+    "confidence": 0.992559
+  },
+  {
+    "text": " pillows",
+    "startMs": 64740,
+    "endMs": 65200,
+    "timestampMs": 64740,
+    "confidence": 0.997037
+  },
+  {
+    "text": " to",
+    "startMs": 65200,
+    "endMs": 65330,
+    "timestampMs": 65200,
+    "confidence": 0.999314
+  },
+  {
+    "text": " their",
+    "startMs": 65330,
+    "endMs": 65660,
+    "timestampMs": 65330,
+    "confidence": 0.999527
+  },
+  {
+    "text": " heads.",
+    "startMs": 65660,
+    "endMs": 66014,
+    "timestampMs": 65660,
+    "confidence": 0.998599
+  },
+  {
+    "text": " His",
+    "startMs": 66364,
+    "endMs": 66460,
+    "timestampMs": 66364,
+    "confidence": 0.997721
+  },
+  {
+    "text": " daughter",
+    "startMs": 66460,
+    "endMs": 67050,
+    "timestampMs": 66460,
+    "confidence": 0.999466
+  },
+  {
+    "text": " asks",
+    "startMs": 67050,
+    "endMs": 67380,
+    "timestampMs": 67050,
+    "confidence": 0.997371
+  },
+  {
+    "text": " if",
+    "startMs": 67380,
+    "endMs": 67560,
+    "timestampMs": 67380,
+    "confidence": 0.936242
+  },
+  {
+    "text": " the",
+    "startMs": 67560,
+    "endMs": 67730,
+    "timestampMs": 67560,
+    "confidence": 0.99751
+  },
+  {
+    "text": " gods",
+    "startMs": 67730,
+    "endMs": 67990,
+    "timestampMs": 67730,
+    "confidence": 0.964681
+  },
+  {
+    "text": " have",
+    "startMs": 67990,
+    "endMs": 68280,
+    "timestampMs": 67990,
+    "confidence": 0.997935
+  },
+  {
+    "text": " left",
+    "startMs": 68280,
+    "endMs": 68530,
+    "timestampMs": 68280,
+    "confidence": 0.99959
+  },
+  {
+    "text": " them.",
+    "startMs": 68530,
+    "endMs": 68930,
+    "timestampMs": 68530,
+    "confidence": 0.998929
+  },
+  {
+    "text": " The",
+    "startMs": 69280,
+    "endMs": 69330,
+    "timestampMs": 69280,
+    "confidence": 0.99803
+  },
+  {
+    "text": " ground",
+    "startMs": 69330,
+    "endMs": 69730,
+    "timestampMs": 69330,
+    "confidence": 0.995308
+  },
+  {
+    "text": " shakes",
+    "startMs": 69730,
+    "endMs": 70130,
+    "timestampMs": 69730,
+    "confidence": 0.995771
+  },
+  {
+    "text": " again.",
+    "startMs": 70130,
+    "endMs": 70890,
+    "timestampMs": 70130,
+    "confidence": 0.998677
+  },
+  {
+    "text": " The",
+    "startMs": 70890,
+    "endMs": 70910,
+    "timestampMs": 70890,
+    "confidence": 0.872831
+  },
+  {
+    "text": " roof",
+    "startMs": 70910,
+    "endMs": 71160,
+    "timestampMs": 70910,
+    "confidence": 0.999165
+  },
+  {
+    "text": " beam",
+    "startMs": 71160,
+    "endMs": 71410,
+    "timestampMs": 71160,
+    "confidence": 0.967991
+  },
+  {
+    "text": " above",
+    "startMs": 71410,
+    "endMs": 71720,
+    "timestampMs": 71410,
+    "confidence": 0.998736
+  },
+  {
+    "text": " them",
+    "startMs": 71720,
+    "endMs": 71960,
+    "timestampMs": 71720,
+    "confidence": 0.990371
+  },
+  {
+    "text": " creaks.",
+    "startMs": 71960,
+    "endMs": 72560,
+    "timestampMs": 71960,
+    "confidence": 0.804574
+  },
+  {
+    "text": " Now",
+    "startMs": 73641,
+    "endMs": 73641,
+    "timestampMs": 73641,
+    "confidence": 0.997172
+  },
+  {
+    "text": " you",
+    "startMs": 73641,
+    "endMs": 73670,
+    "timestampMs": 73641,
+    "confidence": 0.888154
+  },
+  {
+    "text": " decide",
+    "startMs": 73670,
+    "endMs": 74090,
+    "timestampMs": 73670,
+    "confidence": 0.99725
+  },
+  {
+    "text": " for",
+    "startMs": 74090,
+    "endMs": 74520,
+    "timestampMs": 74090,
+    "confidence": 0.998262
+  },
+  {
+    "text": " Tony.",
+    "startMs": 74520,
+    "endMs": 75380,
+    "timestampMs": 74520,
+    "confidence": 0.993379
+  },
+  {
+    "text": " Right",
+    "startMs": 75380,
+    "endMs": 75750,
+    "timestampMs": 75380,
+    "confidence": 0.976554
+  },
+  {
+    "text": " now!",
+    "startMs": 75750,
+    "endMs": 76042,
+    "timestampMs": 75750,
+    "confidence": 0.999466
+  },
+  {
+    "text": " Option",
+    "startMs": 76392,
+    "endMs": 76770,
+    "timestampMs": 76392,
+    "confidence": 0.971444
+  },
+  {
+    "text": " A:",
+    "startMs": 76770,
+    "endMs": 76990,
+    "timestampMs": 76770,
+    "confidence": 0.902171
+  },
+  {
+    "text": " run",
+    "startMs": 76990,
+    "endMs": 77430,
+    "timestampMs": 76990,
+    "confidence": 0.990444
+  },
+  {
+    "text": " for",
+    "startMs": 77430,
+    "endMs": 77470,
+    "timestampMs": 77430,
+    "confidence": 0.998978
+  },
+  {
+    "text": " the",
+    "startMs": 77470,
+    "endMs": 77650,
+    "timestampMs": 77470,
+    "confidence": 0.988793
+  },
+  {
+    "text": " city",
+    "startMs": 77650,
+    "endMs": 77950,
+    "timestampMs": 77650,
+    "confidence": 0.995353
+  },
+  {
+    "text": " gates,",
+    "startMs": 77950,
+    "endMs": 78320,
+    "timestampMs": 77950,
+    "confidence": 0.996711
+  },
+  {
+    "text": " through",
+    "startMs": 78320,
+    "endMs": 78840,
+    "timestampMs": 78320,
+    "confidence": 0.986342
+  },
+  {
+    "text": " the",
+    "startMs": 78840,
+    "endMs": 79060,
+    "timestampMs": 78840,
+    "confidence": 0.995598
+  },
+  {
+    "text": " falling",
+    "startMs": 79060,
+    "endMs": 79580,
+    "timestampMs": 79060,
+    "confidence": 0.984253
+  },
+  {
+    "text": " stones.",
+    "startMs": 79580,
+    "endMs": 79992,
+    "timestampMs": 79580,
+    "confidence": 0.99879
+  },
+  {
+    "text": " Option",
+    "startMs": 80342,
+    "endMs": 81100,
+    "timestampMs": 80342,
+    "confidence": 0.931274
+  },
+  {
+    "text": " B:",
+    "startMs": 81100,
+    "endMs": 81500,
+    "timestampMs": 81100,
+    "confidence": 0.999062
+  },
+  {
+    "text": " stay",
+    "startMs": 81500,
+    "endMs": 82020,
+    "timestampMs": 81500,
+    "confidence": 0.996227
+  },
+  {
+    "text": " inside",
+    "startMs": 82020,
+    "endMs": 82810,
+    "timestampMs": 82020,
+    "confidence": 0.99764
+  },
+  {
+    "text": " and",
+    "startMs": 82810,
+    "endMs": 82980,
+    "timestampMs": 82810,
+    "confidence": 0.957718
+  },
+  {
+    "text": " wait",
+    "startMs": 82980,
+    "endMs": 82980,
+    "timestampMs": 82980,
+    "confidence": 0.942598
+  },
+  {
+    "text": " it",
+    "startMs": 82980,
+    "endMs": 82980,
+    "timestampMs": 82980,
+    "confidence": 0.999035
+  },
+  {
+    "text": " out.",
+    "startMs": 82980,
+    "endMs": 82980,
+    "timestampMs": 82980,
+    "confidence": 0.999741
+  }
+]

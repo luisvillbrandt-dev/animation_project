@@ -150,5 +150,11 @@ summary: what changed per version and which version I should post.
   - Line numbers in timing.json are the line numbers in script.txt; empty lines are skipped.
   - Generated audio (episodes/*/voice/) is not stored in git; rerun the voice step to get it back.
 - Generate captions: `npm run captions -- <episode-id>`
+  - Whisper.cpp 1.5.5 and the model base.en live in `.whisper/` (not in git). First time on a new
+    computer: `npm run captions -- <episode-id> --download-model` (142 MB).
+  - Whisper gives only the timing; the words come from script.txt, and every word is kept inside
+    its line's start/end from timing.json.
+  - Remotion's public folder is `episodes/`, so `staticFile("<episode-id>/voice/voice.wav")` works.
+  - Caption style: `src/components/Captions.tsx`; test view: composition `CaptionsTest`.
 - Check the code for type errors: `npm run typecheck`
 - Shared video settings (size, fps, safe area): `src/video.ts`
