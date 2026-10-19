@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { EmptyCanvas } from "./EmptyCanvas";
 import { StickmanTest } from "./StickmanTest";
 import { StyleTest } from "./StyleTest";
+import { INTRO_FRAMES, Intro } from "./Intro";
 import { TonyPoses } from "./TonyPoses";
 import { TonyTest } from "./TonyTest";
 import { FPS, HEIGHT, WIDTH } from "./video";
@@ -50,6 +51,15 @@ export const RemotionRoot: React.FC = () => {
           durationInFrames={FPS * 4}
         />
       ))}
+      <Composition
+        id="IntroTest"
+        component={Intro}
+        defaultProps={{ place: "Pompeii", year: 79, stage: "ash" as const }}
+        width={WIDTH}
+        height={HEIGHT}
+        fps={FPS}
+        durationInFrames={INTRO_FRAMES}
+      />
       <Composition
         id="TonyPoses"
         component={TonyPoses}
