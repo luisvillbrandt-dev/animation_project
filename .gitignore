@@ -7,3 +7,4 @@ out/*.png
 *.zip
 episodes/*/voice/
 __pycache__/
+out/review/
