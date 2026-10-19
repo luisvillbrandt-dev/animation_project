@@ -1,0 +1,8 @@
+{
+  "voice": "am_michael",
+  "speed": 0.9,
+  "leadIn": 0.15,
+  "pauseBetweenLines": 0.35,
+  "pauseAtEmptyLine": 0.9,
+  "tail": 0.6
+}

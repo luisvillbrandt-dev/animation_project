@@ -141,4 +141,14 @@ summary: what changed per version and which version I should post.
 - Preview in browser: `npm run dev`
 - Render an episode: `npm run render -- <episode-id>`
 - Generate voice: `npm run voice -- <episode-id>`
+  - Voice, speed (1.0 = normal) and pauses: `voice.config.json` (the one place to change them)
+  - Try a voice or speed once: `npm run voice -- <episode-id> --voice bm_george --speed 0.85`
+  - Compare voices: `npm run voice -- <episode-id> --samples am_michael,bm_george`
+    (writes episodes/<id>/voice/samples/<voice>.wav; voice list at the top of scripts/voice.py)
+  - Python runs from `.venv` (Python 3.12, Kokoro). Recreate it with
+    `py -3.12 -m venv .venv` and `.venv\Scripts\python.exe -m pip install -r scripts/requirements.txt`
+  - Line numbers in timing.json are the line numbers in script.txt; empty lines are skipped.
+  - Generated audio (episodes/*/voice/) is not stored in git; rerun the voice step to get it back.
 - Generate captions: `npm run captions -- <episode-id>`
+- Check the code for type errors: `npm run typecheck`
+- Shared video settings (size, fps, safe area): `src/video.ts`

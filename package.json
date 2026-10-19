@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "remotion studio",
     "render": "node -e \"console.log('render: not built yet')\"",
-    "voice": "node -e \"console.log('voice: not built yet')\"",
+    "voice": "node scripts/py.mjs scripts/voice.py",
     "captions": "node -e \"console.log('captions: not built yet')\"",
     "typecheck": "tsc --noEmit"
   },

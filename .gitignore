@@ -5,3 +5,5 @@ out/*.png
 *.log
 .DS_Store
 *.zip
+episodes/*/voice/
+__pycache__/
