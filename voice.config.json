@@ -1,6 +1,6 @@
 {
-  "voice": "am_michael+am_onyx",
-  "speed": 0.9,
+  "voice": "bm_lewis",
+  "speed": 1.0,
   "leadIn": 0.15,
   "pauseBetweenLines": 0.35,
   "pauseAtEmptyLine": 0.9,
