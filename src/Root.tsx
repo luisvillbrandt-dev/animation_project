@@ -24,12 +24,12 @@ export const RemotionRoot: React.FC = () => {
         fps={FPS}
         durationInFrames={FPS * 6}
       />
-      {(["warm", "ash", "dark", "dusk", "line"] as const).map((style) => (
+      {(["day", "ash", "dark"] as const).map((stage) => (
         <Composition
-          key={style}
-          id={`StyleTest-${style}`}
+          key={stage}
+          id={`StyleTest-${stage}`}
           component={StyleTest}
-          defaultProps={{ style }}
+          defaultProps={{ stage }}
           width={WIDTH}
           height={HEIGHT}
           fps={FPS}

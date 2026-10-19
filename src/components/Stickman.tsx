@@ -37,14 +37,17 @@ type Props = {
   facing?: "left" | "right";
   seed?: number; // shifts the wobble so two stickmen never move in sync
   rim?: string; // light edge around the figure so he stays visible on dark backgrounds
+  accessory?: "pillow"; // a pillow tied on the head against falling stones
 };
 
-// Body measurements in stickman units (about 206 units tall at scale 1).
-const HEAD_R = 26;
+// Body measurements in stickman units (about 222 units tall at scale 1).
+// The head is big on purpose, so faces still read on a phone.
+const HEAD_R = 34;
+const FACE_SCALE = HEAD_R / 26; // the face was drawn for a head of radius 26
 const TORSO = 62;
 const SHOULDER = 54; // shoulder height on the torso, measured from the hip
-const UPPER_ARM = 34;
-const FOREARM = 32;
+const UPPER_ARM = 38;
+const FOREARM = 36;
 const THIGH = 44;
 const SHIN = 46;
 const STROKE = 8;
@@ -116,8 +119,8 @@ const POSE_ANGLES: Record<Pose, (t: number) => Angles> = {
     return {
       lean: -8,
       head: -6,
-      backArm: [-120 + w, -140 + w],
-      frontArm: [120 - w, 140 - w],
+      backArm: [-112 + w, -140 + w],
+      frontArm: [112 - w, 140 - w],
       backLeg: [-18, -12],
       frontLeg: [16, 10],
     };
@@ -127,8 +130,8 @@ const POSE_ANGLES: Record<Pose, (t: number) => Angles> = {
     return {
       lean: 0,
       head: 0,
-      backArm: [-100 + w, -175 + w],
-      frontArm: [100 + w, 175 + w],
+      backArm: [-96 + w, -168 + w],
+      frontArm: [96 + w, 168 + w],
       backLeg: [-9, -6],
       frontLeg: [9, 6],
     };
@@ -161,6 +164,7 @@ export const Stickman: React.FC<Props> = ({
   facing = "right",
   seed = 0,
   rim = "none",
+  accessory,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -219,7 +223,15 @@ export const Stickman: React.FC<Props> = ({
       <polyline points={toPoints([hip, neck], dy)} {...line} />
       <g transform={`translate(${head.x} ${head.y + dy}) rotate(${a.lean + a.head})`}>
         <circle r={HEAD_R} fill={headFill} stroke={color} strokeWidth={STROKE} />
-        <Face expression={expression} color={color} fill={headFill} />
+        <g transform={`scale(${FACE_SCALE})`}>
+          <Face expression={expression} color={color} fill={headFill} />
+        </g>
+        {accessory === "pillow" && (
+          <g transform={`translate(-6 ${-HEAD_R - 14}) rotate(-6)`}>
+            <rect x={-46} y={-15} width={92} height={30} rx={14} fill={PILLOW} stroke={color} strokeWidth={5} />
+            <path d="M -30 0 L 30 0" stroke={color} strokeWidth={3} strokeLinecap="round" strokeDasharray="2 8" />
+          </g>
+        )}
       </g>
       <polyline points={toPoints(backArm, dy)} {...line} />
       <polyline points={toPoints(frontArm, dy)} {...line} />
@@ -233,6 +245,7 @@ export const Stickman: React.FC<Props> = ({
 const FX = 3;
 const EYE = 8; // horizontal distance of each eye from the face center
 const SWEAT = "#7cc4e8";
+const PILLOW = "#efe4cf";
 
 const Face: React.FC<{ expression: Expression; color: string; fill: string }> = ({
   expression,
@@ -242,7 +255,7 @@ const Face: React.FC<{ expression: Expression; color: string; fill: string }> = 
   const thin = {
     fill: "none",
     stroke: color,
-    strokeWidth: 3,
+    strokeWidth: 3.5,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };
@@ -259,7 +272,7 @@ const Face: React.FC<{ expression: Expression; color: string; fill: string }> = 
   const wideEyes = (r: number, pupil: number) =>
     [L, R].map((ex) => (
       <g key={ex}>
-        <circle cx={ex} cy={-2} r={r} fill={fill} stroke={color} strokeWidth={2.5} />
+        <circle cx={ex} cy={-2} r={r} fill={fill} stroke={color} strokeWidth={3} />
         <circle cx={ex} cy={-2} r={pupil} fill={color} />
       </g>
     ));
@@ -302,8 +315,8 @@ const Face: React.FC<{ expression: Expression; color: string; fill: string }> = 
           <path d={`M ${R + 4} -7 L ${R - 2} -3.5 L ${R + 4} 0`} {...thin} />
           <path d={`M ${L - 5} -12 L ${L + 3} -9`} {...thin} />
           <path d={`M ${R - 3} -9 L ${R + 5} -12`} {...thin} />
-          <rect x={FX - 8} y={6} width={16} height={9} rx={3} fill={fill} stroke={color} strokeWidth={2.5} />
-          <path d={`M ${FX - 8} 10.5 L ${FX + 8} 10.5 M ${FX - 3} 6 L ${FX - 3} 15 M ${FX + 3} 6 L ${FX + 3} 15`} stroke={color} strokeWidth={1.8} />
+          <rect x={FX - 8} y={6} width={16} height={9} rx={3} fill={fill} stroke={color} strokeWidth={3} />
+          <path d={`M ${FX - 8} 10.5 L ${FX + 8} 10.5`} stroke={color} strokeWidth={2.5} />
           <path
             d="M -36 -24 C -32 -18 -30 -14 -30 -12 A 6 6 0 0 1 -42 -12 C -42 -14 -40 -18 -36 -24 Z"
             fill={SWEAT}
