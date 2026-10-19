@@ -2,6 +2,7 @@
 // with the episode's destination blurred behind him (intro shot).
 import { loadFont } from "@remotion/google-fonts/Montserrat";
 import { AbsoluteFill } from "remotion";
+import { TONY_LOOK } from "./characters/Tony";
 import { INK, StreetVesuvius } from "./components/backgrounds/StreetVesuvius";
 import { Accessory, Stickman } from "./components/Stickman";
 import { HEIGHT, SAFE_TOP, WIDTH } from "./video";
@@ -18,7 +19,7 @@ export const TONY_VARIANTS: Record<
   b: { label: "B · Orange cap + time backpack", accessories: ["cap", "backpack"], accent: "#f28b2c" },
   c: { label: "C · Hair curl + glowing watch", accessories: ["curl", "watch"], accent: "#e2483d" },
   d: { label: "D · Backwards cap + headphones", accessories: ["capBack", "headphones"], accent: "#2f8fd1", accent2: "#f28b2c" },
-  e: { label: "E · Bucket hat + time satchel", accessories: ["bucketHat", "satchel"], accent: "#f2c12e", accent2: "#8a5432" },
+  e: { label: "Tony", ...TONY_LOOK },
   f: { label: "F · Beanie + time backpack", accessories: ["beanie", "backpack"], accent: "#e2483d", accent2: "#2e4a6b" },
 };
 

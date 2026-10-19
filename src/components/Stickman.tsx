@@ -256,9 +256,6 @@ export const Stickman: React.FC<Props> = ({
       <polyline points={toPoints(backLeg, dy)} {...line} />
       <polyline points={toPoints(frontLeg, dy)} {...line} />
       <polyline points={toPoints([hip, neck], dy)} {...line} />
-      {has("satchel") && (
-        <Satchel shoulder={{ x: shoulder.x, y: shoulder.y + dy }} hip={{ x: hip.x, y: hip.y + dy }} t={t} color={color} fill={accent2} />
-      )}
       {has("scarf") && <Scarf neck={{ x: neck.x, y: neck.y + dy }} t={t} color={color} accent={accent} />}
       {has("headphones") && (
         // Resting around the neck: the band hangs under the chin, round ear cups on the collarbones.
@@ -299,6 +296,8 @@ export const Stickman: React.FC<Props> = ({
             <ellipse cx={0} cy={-24} rx={50} ry={11} fill={accent} strokeWidth={6} />
             <path d="M -27 -26 Q -27 -54 0 -54 Q 27 -54 27 -26 Z" fill={accent} strokeWidth={6} />
             <path d="M -26 -32 L 26 -32" stroke={accent2} strokeWidth={6} />
+            {/* A few woven lines so it reads as straw */}
+            <path d="M -14 -40 L -6 -46 M 6 -42 L 14 -48 M -38 -22 L -30 -26 M 30 -26 L 38 -22" stroke={STRAW_LINE} strokeWidth={2.5} strokeLinecap="round" />
           </g>
         )}
         {has("beanie") && (
@@ -328,6 +327,10 @@ export const Stickman: React.FC<Props> = ({
         )}
       </g>
       <polyline points={toPoints(backArm, dy)} {...line} />
+      {/* The bag hangs in front of the back arm, so its glowing clasp stays visible */}
+      {has("satchel") && (
+        <Satchel shoulder={{ x: shoulder.x, y: shoulder.y + dy }} hip={{ x: hip.x, y: hip.y + dy }} t={t} color={color} fill={accent2} />
+      )}
       <polyline points={toPoints(frontArm, dy)} {...line} />
       {has("watch") && <Watch arm={frontArm.map((p) => ({ x: p.x, y: p.y + dy }))} t={t} color={color} />}
     </g>
@@ -338,6 +341,7 @@ const STRAP = "#6b4a2b";
 const LENS = "#9fd8ef";
 const DEVICE_GLOW = "#5ee6f0"; // the light of Tony's time machine
 const POMPOM = "#fff4e0";
+const STRAW_LINE = "#c4931c";
 
 // A scarf wrapped around the neck, two ends fluttering behind him.
 const Scarf: React.FC<{ neck: Point; t: number; color: string; accent: string }> = ({ neck, t, color, accent }) => {
@@ -375,7 +379,8 @@ const Backpack: React.FC<{ shoulder: Point; t: number; color: string; fill: stri
   );
 };
 
-// A bag on a strap across the body, with a glowing time device on the flap.
+// A messenger bag on a strap across the chest, resting against the hip.
+// The glowing clasp on the flap is Tony's time device.
 const Satchel: React.FC<{ shoulder: Point; hip: Point; t: number; color: string; fill: string }> = ({
   shoulder,
   hip,
@@ -384,15 +389,22 @@ const Satchel: React.FC<{ shoulder: Point; hip: Point; t: number; color: string;
   fill,
 }) => {
   const pulse = 0.55 + 0.45 * Math.sin(t * 2 * Math.PI * 1.2);
-  const bx = hip.x - 50;
-  const by = hip.y - 18;
+  const w = 46;
+  const h = 36;
+  const bx = hip.x - 38; // overlaps the body line, so it hangs on him instead of next to him
+  const by = hip.y - 20;
+  const swing = 4 * Math.sin(t * 2 * Math.PI * 0.6);
+  const strap = `M ${shoulder.x + 12} ${shoulder.y - 4} L ${bx + 8} ${by + 4}`;
   return (
-    <g stroke={color} strokeLinecap="round" strokeLinejoin="round">
-      <path d={`M ${shoulder.x + 14} ${shoulder.y - 6} L ${bx + 20} ${by + 4}`} stroke={STRAP} strokeWidth={6} />
-      <rect x={bx} y={by} width={38} height={32} rx={7} fill={fill} strokeWidth={5} />
-      <path d={`M ${bx} ${by + 12} L ${bx + 38} ${by + 12}`} strokeWidth={3} />
-      <circle cx={bx + 19} cy={by + 20} r={12} fill={DEVICE_GLOW} opacity={0.4 * pulse} stroke="none" />
-      <circle cx={bx + 19} cy={by + 20} r={5} fill={DEVICE_GLOW} strokeWidth={3} />
+    <g strokeLinecap="round" strokeLinejoin="round">
+      <path d={strap} stroke={color} strokeWidth={13} />
+      <path d={strap} stroke={fill} strokeWidth={6} />
+      <g stroke={color} transform={`rotate(${swing} ${bx + 8} ${by})`}>
+        <rect x={bx} y={by} width={w} height={h} rx={9} fill={fill} strokeWidth={5} />
+        <path d={`M ${bx} ${by + 3} L ${bx + w} ${by + 3} L ${bx + w} ${by + 17} Q ${bx + w / 2} ${by + 27} ${bx} ${by + 17} Z`} fill={fill} strokeWidth={5} />
+        <circle cx={bx + w / 2} cy={by + 20} r={13} fill={DEVICE_GLOW} opacity={0.45 * pulse} stroke="none" />
+        <circle cx={bx + w / 2} cy={by + 20} r={6} fill={DEVICE_GLOW} strokeWidth={3.5} />
+      </g>
     </g>
   );
 };

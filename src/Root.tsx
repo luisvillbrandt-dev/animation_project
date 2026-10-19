@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { EmptyCanvas } from "./EmptyCanvas";
 import { StickmanTest } from "./StickmanTest";
 import { StyleTest } from "./StyleTest";
+import { TonyPoses } from "./TonyPoses";
 import { TonyTest } from "./TonyTest";
 import { FPS, HEIGHT, WIDTH } from "./video";
 
@@ -49,6 +50,14 @@ export const RemotionRoot: React.FC = () => {
           durationInFrames={FPS * 4}
         />
       ))}
+      <Composition
+        id="TonyPoses"
+        component={TonyPoses}
+        width={WIDTH}
+        height={HEIGHT}
+        fps={FPS}
+        durationInFrames={FPS * 4}
+      />
     </>
   );
 };
