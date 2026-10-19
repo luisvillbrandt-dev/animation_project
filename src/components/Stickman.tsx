@@ -291,13 +291,13 @@ const Face: React.FC<{ expression: Expression; color: string; fill: string }> = 
       );
 
     case "eager":
-      // Determined brows and a big open grin.
+      // Friendly "look, over there!": raised round brows and an open smile.
       return (
         <g>
           {dotEyes(3.4)}
-          <path d={`M ${L - 5} -13 L ${L + 4} -10`} {...thin} />
-          <path d={`M ${R - 4} -10 L ${R + 5} -13`} {...thin} />
-          <path d={`M ${FX - 8} 6 Q ${FX} 20 ${FX + 8} 6 Z`} fill={color} stroke={color} strokeWidth={2} strokeLinejoin="round" />
+          <path d={`M ${L - 4} -12 Q ${L} -16 ${L + 4} -12`} {...thin} />
+          <path d={`M ${R - 4} -12 Q ${R} -16 ${R + 4} -12`} {...thin} />
+          <path d={`M ${FX - 7} 7 Q ${FX} 17 ${FX + 7} 7 Z`} fill={color} stroke={color} strokeWidth={2} strokeLinejoin="round" />
         </g>
       );
 
