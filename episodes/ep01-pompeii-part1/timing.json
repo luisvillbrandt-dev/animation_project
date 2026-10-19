@@ -1,116 +1,158 @@
 [
   {
     "line": 1,
-    "text": "You are a baker in Pompeii. It's the year 79 AD. A normal day.",
+    "text": "This is Tony! Today, he travels to ancient Pompeii!",
     "start": 0.15,
-    "end": 5.076
-  },
-  {
-    "line": 2,
-    "text": "Just after midday, the ground shakes.",
-    "start": 5.426,
-    "end": 7.735
+    "end": 3.519
   },
   {
     "line": 3,
-    "text": "Then a thunderclap rolls down from Mount Vesuvius.",
-    "start": 8.085,
-    "end": 11.238
+    "text": "By tomorrow morning, this whole city will be buried.",
+    "start": 4.419,
+    "end": 7.458
   },
   {
     "line": 4,
-    "text": "A column of ash and smoke shoots miles into the sky.",
-    "start": 11.588,
-    "end": 14.818
+    "text": "Tony is a baker now. It's the year 79 AD. A normal day.",
+    "start": 7.808,
+    "end": 12.517
   },
   {
     "line": 5,
-    "text": "It spreads out like a giant tree.",
-    "start": 15.168,
-    "end": 17.226
+    "text": "The oven is hot. The bread is almost ready.",
+    "start": 12.867,
+    "end": 15.734
   },
   {
     "line": 6,
-    "text": "Nobody here knows what this is.",
-    "start": 17.576,
-    "end": 19.749
+    "text": "For days, the ground has been shaking a little.",
+    "start": 16.084,
+    "end": 18.716
   },
   {
     "line": 7,
-    "text": "An hour later, small white stones start falling.",
-    "start": 20.099,
-    "end": 23.096
+    "text": "Just after midday, Vesuvius explodes.",
+    "start": 19.066,
+    "end": 21.836
   },
   {
     "line": 8,
-    "text": "Pumice. Light. Almost harmless.",
-    "start": 23.446,
-    "end": 25.388
+    "text": "A column of ash and smoke shoots miles into the sky.",
+    "start": 22.186,
+    "end": 25.211
   },
   {
     "line": 9,
-    "text": "Your neighbors are already running for the harbor.",
-    "start": 25.738,
-    "end": 28.237
+    "text": "It spreads out like a giant pine tree.",
+    "start": 25.561,
+    "end": 27.683
   },
   {
     "line": 10,
-    "text": "Your wife is holding your daughter. They're waiting for you to decide.",
-    "start": 28.587,
-    "end": 32.261
+    "text": "No one here saw this coming.",
+    "start": 28.033,
+    "end": 29.632
+  },
+  {
+    "line": 11,
+    "text": "Soon after, small white stones start falling.",
+    "start": 29.982,
+    "end": 32.521
   },
   {
     "line": 12,
-    "text": "Inside your house, you're protected from the falling stones.",
-    "start": 33.161,
-    "end": 36.537
+    "text": "Pumice. Light. Not dangerous, at first.",
+    "start": 32.871,
+    "end": 35.303
   },
   {
     "line": 13,
-    "text": "The walls are thick. The doors are strong.",
-    "start": 36.887,
-    "end": 39.4
+    "text": "They rattle on the roof tiles like hail.",
+    "start": 35.653,
+    "end": 37.698
   },
   {
     "line": 14,
-    "text": "But the stones keep coming.",
-    "start": 39.75,
-    "end": 41.537
+    "text": "The sky turns grey. The afternoon feels like evening.",
+    "start": 38.048,
+    "end": 41.649
   },
   {
     "line": 15,
-    "text": "They pile up on the roof. Hour after hour.",
-    "start": 41.887,
-    "end": 44.701
+    "text": "His neighbors are already running for the city gates.",
+    "start": 41.999,
+    "end": 44.746
   },
   {
     "line": 16,
-    "text": "The ground shakes again. The roof beam above you creaks.",
-    "start": 45.051,
-    "end": 48.507
+    "text": "His wife is holding their daughter. They're waiting for a decision.",
+    "start": 45.096,
+    "end": 48.579
   },
   {
     "line": 18,
-    "text": "You have to choose. Right now.",
-    "start": 49.407,
-    "end": 51.296
+    "text": "For now, inside the house, they're safe from the stones.",
+    "start": 49.479,
+    "end": 52.624
   },
   {
     "line": 19,
-    "text": "Option A: run for the harbor, into the chaos.",
-    "start": 51.646,
-    "end": 54.532
+    "text": "The walls are thick. The doors are strong.",
+    "start": 52.974,
+    "end": 55.425
   },
   {
     "line": 20,
-    "text": "Option B: stay inside and wait it out.",
-    "start": 54.882,
-    "end": 57.375
+    "text": "But the stones keep coming.",
+    "start": 55.775,
+    "end": 57.25
   },
   {
     "line": 21,
-    "text": "Vote in the comments. Part two tomorrow.",
-    "start": 57.725,
-    "end": 60.322
+    "text": "They pile up on the roof. Hour after hour.",
+    "start": 57.6,
+    "end": 60.297
+  },
+  {
+    "line": 22,
+    "text": "Outside, the stones are already knee-deep.",
+    "start": 60.647,
+    "end": 63.034
+  },
+  {
+    "line": 23,
+    "text": "In the street, people tie pillows to their heads.",
+    "start": 63.384,
+    "end": 66.014
+  },
+  {
+    "line": 24,
+    "text": "His daughter asks if the gods have left them.",
+    "start": 66.364,
+    "end": 68.93
+  },
+  {
+    "line": 25,
+    "text": "The ground shakes again. The roof beam above them creaks.",
+    "start": 69.28,
+    "end": 72.741
+  },
+  {
+    "line": 27,
+    "text": "Now you decide for Tony. Right now!",
+    "start": 73.641,
+    "end": 76.042
+  },
+  {
+    "line": 28,
+    "text": "Option A: run for the city gates, through the falling stones.",
+    "start": 76.392,
+    "end": 79.992
+  },
+  {
+    "line": 29,
+    "text": "Option B: stay inside and wait it out.",
+    "start": 80.342,
+    "end": 82.98
   }
 ]
