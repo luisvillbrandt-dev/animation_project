@@ -395,7 +395,7 @@ const Satchel: React.FC<{ shoulder: Point; hip: Point; t: number; color: string;
   const bx = hip.x - 38; // overlaps the body line, so it hangs on him instead of next to him
   const by = hip.y - 20;
   const swing = 4 * Math.sin(t * 2 * Math.PI * 0.6);
-  const strap = `M ${shoulder.x - 2} ${shoulder.y - 2} Q ${shoulder.x - 26} ${(shoulder.y + by) / 2} ${bx + 10} ${by + 3}`;
+  const strap = `M ${shoulder.x - 2} ${shoulder.y - 2} Q ${shoulder.x - 12} ${(shoulder.y + by) / 2} ${bx + 12} ${by + 3}`;
   return (
     <g strokeLinecap="round" strokeLinejoin="round">
       <path d={strap} fill="none" stroke={color} strokeWidth={11} />
