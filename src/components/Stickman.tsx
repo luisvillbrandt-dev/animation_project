@@ -4,13 +4,31 @@
 import { useCurrentFrame, useVideoConfig } from "remotion";
 
 export const POSES = ["idle", "walking", "running", "pointing", "shocked", "deciding"] as const;
-export const EXPRESSIONS = ["neutral", "worried", "scared"] as const;
+export const EXPRESSIONS = [
+  "neutral",
+  "worried",
+  "scared",
+  "strained",
+  "eager",
+  "shocked",
+  "asking",
+] as const;
 export type Pose = (typeof POSES)[number];
 export type Expression = (typeof EXPRESSIONS)[number];
 
+// The face each pose gets when no expression is given.
+export const POSE_FACE: Record<Pose, Expression> = {
+  idle: "neutral",
+  walking: "neutral",
+  running: "strained",
+  pointing: "eager",
+  shocked: "shocked",
+  deciding: "asking",
+};
+
 type Props = {
   pose: Pose;
-  expression?: Expression;
+  expression?: Expression; // leave out to use the pose's own face (POSE_FACE)
   x: number;
   y: number;
   scale?: number;
@@ -132,7 +150,7 @@ const toPoints = (pts: Point[], dy: number) =>
 
 export const Stickman: React.FC<Props> = ({
   pose,
-  expression = "neutral",
+  expression = POSE_FACE[pose],
   x,
   y,
   scale = 1,
@@ -186,8 +204,12 @@ export const Stickman: React.FC<Props> = ({
   );
 };
 
+// Face coordinates are relative to the head center. Everything inside the head stays within
+// about 19 units of the center, so the thick head outline never covers it.
 // The face sits a little toward the facing side, so he looks where he is going.
-const FX = 5;
+const FX = 3;
+const EYE = 8; // horizontal distance of each eye from the face center
+const SWEAT = "#7cc4e8";
 
 const Face: React.FC<{ expression: Expression; color: string; fill: string }> = ({
   expression,
@@ -199,37 +221,121 @@ const Face: React.FC<{ expression: Expression; color: string; fill: string }> = 
     stroke: color,
     strokeWidth: 3,
     strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
   };
+  const L = FX - EYE;
+  const R = FX + EYE;
 
-  if (expression === "scared") {
-    return (
-      <g>
-        {[-9, 9].map((ex) => (
-          <g key={ex}>
-            <circle cx={FX + ex} cy={-3} r={6} fill={fill} stroke={color} strokeWidth={2.5} />
-            <circle cx={FX + ex} cy={-3} r={2.4} fill={color} />
-          </g>
-        ))}
-        <path d={`M ${FX - 15} -14 L ${FX - 5} -19`} {...thin} />
-        <path d={`M ${FX + 5} -19 L ${FX + 15} -14`} {...thin} />
-        <ellipse cx={FX} cy={11} rx={4.5} ry={6} fill={color} />
-      </g>
-    );
-  }
-
-  return (
-    <g>
-      <circle cx={FX - 9} cy={-3} r={3.2} fill={color} />
-      <circle cx={FX + 9} cy={-3} r={3.2} fill={color} />
-      {expression === "worried" ? (
-        <>
-          <path d={`M ${FX - 14} -10 L ${FX - 5} -14`} {...thin} />
-          <path d={`M ${FX + 5} -14 L ${FX + 14} -10`} {...thin} />
-          <path d={`M ${FX - 7} 12 Q ${FX} 6 ${FX + 7} 12`} {...thin} />
-        </>
-      ) : (
-        <path d={`M ${FX - 6} 10 L ${FX + 6} 10`} {...thin} />
-      )}
-    </g>
+  const dotEyes = (r = 3.2) => (
+    <>
+      <circle cx={L} cy={-3} r={r} fill={color} />
+      <circle cx={R} cy={-3} r={r} fill={color} />
+    </>
   );
+  // Big white eyes with a small pupil: the smaller the pupil, the bigger the fright.
+  const wideEyes = (r: number, pupil: number) =>
+    [L, R].map((ex) => (
+      <g key={ex}>
+        <circle cx={ex} cy={-2} r={r} fill={fill} stroke={color} strokeWidth={2.5} />
+        <circle cx={ex} cy={-2} r={pupil} fill={color} />
+      </g>
+    ));
+
+  switch (expression) {
+    case "neutral":
+      return (
+        <g>
+          {dotEyes()}
+          <path d={`M ${FX - 6} 10 L ${FX + 6} 10`} {...thin} />
+        </g>
+      );
+
+    case "worried":
+      return (
+        <g>
+          {dotEyes()}
+          <path d={`M ${L - 5} -10 L ${L + 4} -14`} {...thin} />
+          <path d={`M ${R - 4} -14 L ${R + 5} -10`} {...thin} />
+          <path d={`M ${FX - 7} 12 Q ${FX} 6 ${FX + 7} 12`} {...thin} />
+        </g>
+      );
+
+    case "scared":
+      // Brows pulled up in the middle, trembling mouth.
+      return (
+        <g>
+          {wideEyes(5.5, 2)}
+          <path d={`M ${L - 5} -10 L ${L + 4} -15`} {...thin} />
+          <path d={`M ${R - 4} -15 L ${R + 5} -10`} {...thin} />
+          <path d={`M ${FX - 8} 12 q 2 -3 4 0 t 4 0 t 4 0 t 4 0`} {...thin} />
+        </g>
+      );
+
+    case "strained":
+      // Squeezed eyes, gritted teeth, a drop of sweat behind the head.
+      return (
+        <g>
+          <path d={`M ${L - 4} -7 L ${L + 2} -3.5 L ${L - 4} 0`} {...thin} />
+          <path d={`M ${R + 4} -7 L ${R - 2} -3.5 L ${R + 4} 0`} {...thin} />
+          <path d={`M ${L - 5} -12 L ${L + 3} -9`} {...thin} />
+          <path d={`M ${R - 3} -9 L ${R + 5} -12`} {...thin} />
+          <rect x={FX - 8} y={6} width={16} height={9} rx={3} fill={fill} stroke={color} strokeWidth={2.5} />
+          <path d={`M ${FX - 8} 10.5 L ${FX + 8} 10.5 M ${FX - 3} 6 L ${FX - 3} 15 M ${FX + 3} 6 L ${FX + 3} 15`} stroke={color} strokeWidth={1.8} />
+          <path
+            d="M -36 -24 C -32 -18 -30 -14 -30 -12 A 6 6 0 0 1 -42 -12 C -42 -14 -40 -18 -36 -24 Z"
+            fill={SWEAT}
+            stroke={color}
+            strokeWidth={2}
+          />
+        </g>
+      );
+
+    case "eager":
+      // Determined brows and a big open grin.
+      return (
+        <g>
+          {dotEyes(3.4)}
+          <path d={`M ${L - 5} -13 L ${L + 4} -10`} {...thin} />
+          <path d={`M ${R - 4} -10 L ${R + 5} -13`} {...thin} />
+          <path d={`M ${FX - 8} 6 Q ${FX} 20 ${FX + 8} 6 Z`} fill={color} stroke={color} strokeWidth={2} strokeLinejoin="round" />
+        </g>
+      );
+
+    case "shocked":
+      // Huge eyes, tiny pupils, high brows, open mouth, shock lines above the head.
+      return (
+        <g>
+          {wideEyes(6, 1.8)}
+          <path d={`M ${L - 5} -13 Q ${L} -19 ${L + 5} -13`} {...thin} />
+          <path d={`M ${R - 5} -13 Q ${R} -19 ${R + 5} -13`} {...thin} />
+          <ellipse cx={FX} cy={12} rx={5} ry={6.5} fill={color} />
+          {[-40, 0, 40].map((deg) => {
+            const r = (deg * Math.PI) / 180;
+            return (
+              <path
+                key={deg}
+                d={`M ${34 * Math.sin(r)} ${-34 * Math.cos(r)} L ${46 * Math.sin(r)} ${-46 * Math.cos(r)}`}
+                {...thin}
+                strokeWidth={4}
+              />
+            );
+          })}
+        </g>
+      );
+
+    case "asking":
+      // One brow raised, a doubtful mouth and a question mark next to the head.
+      return (
+        <g>
+          {dotEyes()}
+          <path d={`M ${L - 4} -10 L ${L + 4} -10`} {...thin} />
+          <path d={`M ${R - 5} -13 Q ${R} -19 ${R + 5} -13`} {...thin} />
+          <path d={`M ${FX - 5} 12 L ${FX + 5} 9`} {...thin} />
+          <g transform="translate(42 -40)">
+            <path d="M -6 -6 Q -6 -14 1 -14 Q 8 -14 8 -7 Q 8 -2 2 1 L 2 5" {...thin} strokeWidth={4.5} />
+            <circle cx={2} cy={12} r={2.8} fill={color} />
+          </g>
+        </g>
+      );
+  }
 };

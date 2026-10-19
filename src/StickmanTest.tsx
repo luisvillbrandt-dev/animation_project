@@ -1,7 +1,10 @@
-// Test sheet: all stickman poses side by side. The expression changes every 2 seconds.
+// Test sheet: all stickman poses side by side. Every 2 seconds the faces switch:
+// first each pose with its own face, then all worried, then all scared.
 import { loadFont } from "@remotion/google-fonts/Montserrat";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { EXPRESSIONS, POSES, Stickman } from "./components/Stickman";
+import { Expression, POSES, Stickman } from "./components/Stickman";
+
+const FACE_ROUNDS: (Expression | undefined)[] = [undefined, "worried", "scared"];
 import { HEIGHT, SAFE_TOP, WIDTH } from "./video";
 
 const { fontFamily } = loadFont("normal", { weights: ["800"], subsets: ["latin"] });
@@ -17,7 +20,7 @@ const ROW_HEIGHT = 390;
 export const StickmanTest: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const expression = EXPRESSIONS[Math.floor(frame / (2 * fps)) % EXPRESSIONS.length];
+  const expression = FACE_ROUNDS[Math.floor(frame / (2 * fps)) % FACE_ROUNDS.length];
 
   return (
     <AbsoluteFill style={{ backgroundColor: PAPER }}>
@@ -27,7 +30,7 @@ export const StickmanTest: React.FC = () => {
             STICKMAN TEST
           </text>
           <text x={WIDTH / 2} y={SAFE_TOP + 126} fontSize={40} fill={ACCENT}>
-            expression: {expression}
+            expression: {expression ?? "each pose's own"}
           </text>
 
           {POSES.map((pose, i) => {
