@@ -52,9 +52,15 @@ const CAPTIONS: { from: number; to: number; text: string }[] = [
   { from: F(3.0), to: F(3.8), text: "POMPEII." },
 ];
 
-type Props = { place: string; year: number; stage: Stage };
+type Props = {
+  place: string;
+  year: number;
+  stage: Stage;
+  audio?: boolean; // the test plays its own hook line; a full episode brings its own voice
+  captions?: boolean; // the mock-up captions; a full episode uses the real captions
+};
 
-export const Intro: React.FC<Props> = ({ place, year, stage }) => {
+export const Intro: React.FC<Props> = ({ place, year, stage, audio = true, captions = true }) => {
   const frame = useCurrentFrame();
   const caption = CAPTIONS.find((c) => frame >= c.from && frame < c.to);
   const irisR =
@@ -64,7 +70,7 @@ export const Intro: React.FC<Props> = ({ place, year, stage }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: INK }}>
-      <Html5Audio src={staticFile("intro-test/voice/voice.wav")} />
+      {audio && <Html5Audio src={staticFile("intro-test/voice/voice.wav")} />}
       <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} width={WIDTH} height={HEIGHT}>
         <defs>
           <filter id="intro-blur" x="-5%" y="-5%" width="110%" height="110%">
@@ -104,7 +110,7 @@ export const Intro: React.FC<Props> = ({ place, year, stage }) => {
           opacity={interpolate(frame, [T.timeline - F(0.12), T.timeline, T.timeline + F(0.3)], [0, 1, 0], clamp)}
         />
 
-        {caption && <Caption text={caption.text} />}
+        {captions && caption && <Caption text={caption.text} />}
       </svg>
     </AbsoluteFill>
   );

@@ -18,6 +18,7 @@ type Props = {
   scale?: number;
   facing?: "left" | "right";
   rim?: string;
+  seed?: number;
   extra?: Accessory[]; // things he wears on top in a scene, e.g. a pillow
 };
 

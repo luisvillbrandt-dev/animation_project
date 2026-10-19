@@ -30,7 +30,9 @@ export type Accessory =
   | "backpack"
   | "satchel"
   | "curl"
-  | "watch";
+  | "watch"
+  | "dress" // long dress (women and girls); color = accent
+  | "bun"; // hair tied up at the back of the head
 
 // The face each pose gets when no expression is given.
 export const POSE_FACE: Record<Pose, Expression> = {
@@ -256,6 +258,15 @@ export const Stickman: React.FC<Props> = ({
       <polyline points={toPoints(backLeg, dy)} {...line} />
       <polyline points={toPoints(frontLeg, dy)} {...line} />
       <polyline points={toPoints([hip, neck], dy)} {...line} />
+      {has("dress") && (
+        <path
+          d={`M ${shoulder.x - 12} ${shoulder.y + dy} L ${shoulder.x + 12} ${shoulder.y + dy} L ${hip.x + 34} ${hip.y + dy + 52} L ${hip.x - 34} ${hip.y + dy + 52} Z`}
+          fill={accent}
+          stroke={color}
+          strokeWidth={6}
+          strokeLinejoin="round"
+        />
+      )}
       {has("scarf") && <Scarf neck={{ x: neck.x, y: neck.y + dy }} t={t} color={color} accent={accent} />}
       {has("headphones") && (
         // Resting around the neck: the band hangs under the chin, round ear cups on the collarbones.
@@ -270,6 +281,7 @@ export const Stickman: React.FC<Props> = ({
         </g>
       )}
       <g transform={`translate(${head.x} ${head.y + dy}) rotate(${a.lean + a.head})`}>
+        {has("bun") && <circle cx={-HEAD_R + 2} cy={-HEAD_R + 12} r={14} fill={color} />}
         <circle r={HEAD_R} fill={headFill} stroke={color} strokeWidth={STROKE} />
         <g transform={`scale(${FACE_SCALE})`}>
           <Face expression={expression} color={color} fill={headFill} />

@@ -139,7 +139,15 @@ summary: what changed per version and which version I should post.
 
 ## Commands (update this section as the project grows)
 - Preview in browser: `npm run dev`
-- Render an episode: `npm run render -- <episode-id>`
+- Render an episode: `npm run render -- <episode-id>` (writes out/<episode-id>-vN.mp4 with the next
+  free N; composition `Episode` in src/Episode.tsx)
+  - scenes.json extends the format above with: top-level `place`, `year`, `introStage`;
+    per scene `background` (intro | street | bakery | gate | room | vote), `stage` (day | ash | dark),
+    characters `name` (tony | wife | daughter | neighbor), optional `toX`, `facing`, `extra`,
+    `changes` [{ line, pose, expression }]; `effects` shake / eruption / beamCreak / tag;
+    street `plume`, `pumice`; room `pile`; vote card `vote` [A, B] with the line that reads each option.
+    The full list of fields is the SceneSpec type at the top of src/Episode.tsx.
+  - Two empty lines in script.txt = a pause twice as long (after the hook, while the intro plays).
 - Generate voice: `npm run voice -- <episode-id>`
   - Voice, speed (1.0 = normal) and pauses: `voice.config.json` (the one place to change them)
   - Try a voice or speed once: `npm run voice -- <episode-id> --voice bm_george --speed 0.85`

@@ -96,11 +96,11 @@ export const Captions: React.FC<{ captions: Caption[] }> = ({ captions }) => {
             transform: `scale(${0.85 + 0.15 * pop})`,
           }}
         >
-          {page.tokens.map((token) => {
+          {page.tokens.map((token, i) => {
             const active = nowMs >= token.fromMs && nowMs < token.toMs;
             return (
               <span
-                key={token.fromMs}
+                key={`${page.startMs}-${i}`}
                 style={{
                   display: "inline-block",
                   margin: "0 0.22em", // wide enough that the thick outline does not eat the space

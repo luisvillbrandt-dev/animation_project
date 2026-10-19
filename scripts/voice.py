@@ -13,7 +13,8 @@ Writes:
   episodes/<id>/voice/voice.wav     all lines joined with pauses
   episodes/<id>/timing.json         [{"line": 1, "text": "...", "start": 0.15, "end": 3.2}, ...]
 
-script.txt: one sentence per line. An empty line means a longer pause. Line numbers are the line
+script.txt: one sentence per line. An empty line means a longer pause; two empty lines a pause twice
+as long (used after the hook, while the intro travels through time). Line numbers are the line
 numbers you see in the editor; empty lines get no entry in timing.json.
 
 Voices (the first letter is the accent: a = American, b = British; the second: m = male, f = female):
@@ -44,16 +45,17 @@ MAX_SECONDS = 90
 
 
 def read_script(path):
-    """Returns a list of (line_number, text, pause_before) for every spoken line."""
+    """Returns a list of (line_number, text, empty_lines_before) for every spoken line."""
     lines = []
-    empty_before = False
+    empty_before = 0
     for number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         text = raw.strip()
         if not text:
-            empty_before = bool(lines)  # an empty line at the very top is ignored
+            if lines:  # empty lines at the very top are ignored
+                empty_before += 1
             continue
         lines.append((number, text, empty_before))
-        empty_before = False
+        empty_before = 0
     return lines
 
 
@@ -101,7 +103,8 @@ def join(clips, lines, config):
     timing = []
     for index, ((number, text, empty_before), clip) in enumerate(zip(lines, clips)):
         if index > 0:
-            pause = config["pauseAtEmptyLine"] if empty_before else config["pauseBetweenLines"]
+            # Each empty line adds one long pause: two empty lines = twice as long.
+            pause = config["pauseAtEmptyLine"] * empty_before if empty_before else config["pauseBetweenLines"]
             pieces.append(silence(pause))
             position += pause
         start = position

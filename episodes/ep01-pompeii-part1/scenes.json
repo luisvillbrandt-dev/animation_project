@@ -1,0 +1,184 @@
+{
+  "episode": "ep01-pompeii-part1",
+  "place": "Pompeii",
+  "year": 79,
+  "introStage": "ash",
+  "scenes": [
+    {
+      "id": "s0-intro",
+      "lines": [1],
+      "background": "intro"
+    },
+    {
+      "id": "s1-arrival",
+      "lines": [4, 5],
+      "background": "street",
+      "stage": "day",
+      "characters": [{ "name": "tony", "pose": "idle", "x": 0.426 }],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.08, "focusX": 0.43, "focusY": 0.45 },
+      "effects": [{ "type": "tag" }]
+    },
+    {
+      "id": "s2-oven",
+      "lines": [6, 7],
+      "background": "bakery",
+      "stage": "day",
+      "characters": [
+        {
+          "name": "tony",
+          "pose": "pointing",
+          "x": 0.62,
+          "facing": "left",
+          "changes": [{ "line": 7, "pose": "idle", "expression": "worried" }]
+        }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.08, "focusX": 0.5, "focusY": 0.5 },
+      "effects": [{ "type": "shake", "line": 7, "strength": 0.3 }]
+    },
+    {
+      "id": "s3-eruption",
+      "lines": [8, 9],
+      "background": "street",
+      "stage": "day",
+      "characters": [
+        { "name": "tony", "pose": "idle", "x": 0.426, "changes": [{ "line": 8, "pose": "shocked" }] }
+      ],
+      "camera": { "zoomFrom": 1.12, "zoomTo": 1.0, "focusX": 0.5, "focusY": 0.3 },
+      "effects": [{ "type": "eruption", "line": 8 }]
+    },
+    {
+      "id": "s4-pine-tree",
+      "lines": [10, 11],
+      "background": "street",
+      "stage": "day",
+      "plume": 1,
+      "characters": [
+        { "name": "neighbor", "pose": "shocked", "x": 0.16, "seed": 1.3 },
+        { "name": "tony", "pose": "pointing", "expression": "worried", "x": 0.426, "facing": "right" },
+        { "name": "neighbor", "pose": "idle", "expression": "scared", "x": 0.84, "facing": "left", "seed": 2.1 }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.04, "focusX": 0.5, "focusY": 0.25 }
+    },
+    {
+      "id": "s5-pumice",
+      "lines": [12, 13, 14],
+      "background": "street",
+      "stage": "ash",
+      "characters": [
+        {
+          "name": "tony",
+          "pose": "idle",
+          "expression": "worried",
+          "x": 0.426,
+          "changes": [
+            { "line": 13, "expression": "neutral" },
+            { "line": 14, "expression": "worried" }
+          ]
+        }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.12, "focusX": 0.43, "focusY": 0.45 }
+    },
+    {
+      "id": "s6-gate",
+      "lines": [15, 16],
+      "background": "gate",
+      "stage": "ash",
+      "characters": [
+        { "name": "neighbor", "pose": "running", "x": 1.15, "toX": 0.28, "facing": "left", "seed": 0.4 },
+        { "name": "neighbor", "pose": "running", "x": 1.45, "toX": 0.5, "facing": "left", "scale": 2.0, "seed": 1.7 },
+        { "name": "neighbor", "pose": "running", "x": 0.95, "toX": 0.08, "facing": "left", "scale": 2.4, "seed": 2.6 }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.05, "focusX": 0.4, "focusY": 0.55 }
+    },
+    {
+      "id": "s7-family",
+      "lines": [17],
+      "background": "street",
+      "stage": "ash",
+      "characters": [
+        { "name": "tony", "pose": "deciding", "x": 0.33 },
+        { "name": "wife", "pose": "idle", "expression": "worried", "x": 0.6, "facing": "left" },
+        { "name": "daughter", "pose": "idle", "expression": "scared", "x": 0.74, "facing": "left", "seed": 0.8 }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.08, "focusX": 0.48, "focusY": 0.5 }
+    },
+    {
+      "id": "s8-inside",
+      "lines": [19, 20, 21],
+      "background": "room",
+      "stage": "ash",
+      "pile": 0.25,
+      "characters": [
+        {
+          "name": "tony",
+          "pose": "idle",
+          "x": 0.45,
+          "changes": [{ "line": 21, "expression": "worried" }]
+        },
+        { "name": "wife", "pose": "idle", "x": 0.63, "facing": "left" },
+        { "name": "daughter", "pose": "idle", "expression": "worried", "x": 0.77, "facing": "left" }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.06, "focusX": 0.55, "focusY": 0.45 }
+    },
+    {
+      "id": "s9-roof",
+      "lines": [22, 23],
+      "background": "room",
+      "stage": "ash",
+      "pile": 0.6,
+      "characters": [
+        { "name": "tony", "pose": "idle", "expression": "worried", "x": 0.45 },
+        { "name": "wife", "pose": "idle", "expression": "worried", "x": 0.63, "facing": "left" },
+        { "name": "daughter", "pose": "idle", "expression": "scared", "x": 0.77, "facing": "left" }
+      ],
+      "camera": { "zoomFrom": 1.15, "zoomTo": 1.25, "focusX": 0.62, "focusY": 0.3 }
+    },
+    {
+      "id": "s10-pillows",
+      "lines": [24],
+      "background": "street",
+      "stage": "dark",
+      "characters": [
+        { "name": "neighbor", "pose": "running", "x": 1.1, "toX": 0.35, "facing": "left", "extra": ["pillow"], "seed": 0.2 },
+        { "name": "neighbor", "pose": "running", "x": 1.5, "toX": 0.72, "facing": "left", "extra": ["pillow"], "scale": 2.0, "seed": 1.1 }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.06, "focusX": 0.5, "focusY": 0.5 }
+    },
+    {
+      "id": "s11-beam",
+      "lines": [25, 26],
+      "background": "room",
+      "stage": "dark",
+      "pile": 0.85,
+      "characters": [
+        { "name": "tony", "pose": "idle", "expression": "worried", "x": 0.45, "changes": [{ "line": 26, "pose": "shocked" }] },
+        { "name": "wife", "pose": "idle", "expression": "worried", "x": 0.63, "facing": "left", "changes": [{ "line": 26, "expression": "scared" }] },
+        { "name": "daughter", "pose": "idle", "expression": "asking", "x": 0.77, "facing": "left", "changes": [{ "line": 26, "expression": "scared" }] }
+      ],
+      "camera": { "zoomFrom": 1.0, "zoomTo": 1.1, "focusX": 0.55, "focusY": 0.4 },
+      "effects": [{ "type": "shake", "line": 26, "strength": 0.6 }, { "type": "beamCreak", "line": 26 }]
+    },
+    {
+      "id": "s12-decide",
+      "lines": [28],
+      "background": "room",
+      "stage": "dark",
+      "pile": 0.9,
+      "characters": [
+        { "name": "tony", "pose": "deciding", "x": 0.45 },
+        { "name": "wife", "pose": "idle", "expression": "scared", "x": 0.63, "facing": "left" },
+        { "name": "daughter", "pose": "idle", "expression": "scared", "x": 0.77, "facing": "left" }
+      ],
+      "camera": { "zoomFrom": 1.3, "zoomTo": 1.42, "focusX": 0.45, "focusY": 0.44 }
+    },
+    {
+      "id": "s13-vote",
+      "lines": [29, 30],
+      "background": "vote",
+      "vote": [
+        { "letter": "A", "line": 29, "title": "RUN FOR THE CITY GATES", "detail": "through the falling stones", "pose": "running" },
+        { "letter": "B", "line": 30, "title": "STAY INSIDE", "detail": "and wait it out", "pose": "deciding" }
+      ]
+    }
+  ]
+}

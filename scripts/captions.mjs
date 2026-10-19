@@ -90,19 +90,37 @@ function normalize(word) {
   return word.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
-// Walks through the lines of timing.json and clamps each line's words to that line's start and end.
+// Walks through the lines of timing.json and fixes each line's word times:
+// - The TTS voice speaks evenly, so a word's start can be estimated from its position in the line
+//   (by letters). If Whisper is more than 0.3 s off that estimate, the estimate is used instead.
+// - Every word lies inside its line, starts after the previous word and lasts at least 80 ms;
+//   it ends where the next word starts (the last one at the end of the line).
 function fitToLines(captions, timing) {
+  const TRUST_MS = 300;
+  const MIN_MS = 80;
   let k = 0;
   for (const line of timing) {
     const n = line.text.split(/\s+/).filter((w) => normalize(w) !== "").length;
-    const startMs = Math.round(line.start * 1000);
-    const endMs = Math.round(line.end * 1000);
-    for (const c of captions.slice(k, k + n)) {
-      c.startMs = Math.min(Math.max(c.startMs, startMs), endMs);
-      c.endMs = Math.max(Math.min(c.endMs, endMs), c.startMs);
-      c.timestampMs = c.startMs;
-    }
+    const words = captions.slice(k, k + n);
     k += n;
+    const lineStart = Math.round(line.start * 1000);
+    const lineEnd = Math.round(line.end * 1000);
+    const weights = words.map((c) => normalize(c.text).length + 2);
+    const total = weights.reduce((a, b) => a + b, 0);
+    let before = 0;
+    let previousStart = lineStart - MIN_MS;
+    words.forEach((c, i) => {
+      const estimate = lineStart + (before / total) * (lineEnd - lineStart);
+      before += weights[i];
+      let start = Math.abs(c.startMs - estimate) <= TRUST_MS ? c.startMs : Math.round(estimate);
+      start = Math.min(Math.max(start, lineStart, previousStart + MIN_MS), lineEnd - MIN_MS);
+      c.startMs = start;
+      previousStart = start;
+    });
+    words.forEach((c, i) => {
+      c.endMs = i + 1 < words.length ? words[i + 1].startMs : lineEnd;
+      c.timestampMs = c.startMs;
+    });
   }
   return captions;
 }

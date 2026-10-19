@@ -5,7 +5,7 @@
   "description": "History's Impossible Decisions: vertical stickman shorts built with Remotion",
   "scripts": {
     "dev": "remotion studio",
-    "render": "node -e \"console.log('render: not built yet')\"",
+    "render": "node scripts/render.mjs",
     "voice": "node scripts/py.mjs scripts/voice.py",
     "captions": "node scripts/captions.mjs",
     "typecheck": "tsc --noEmit"

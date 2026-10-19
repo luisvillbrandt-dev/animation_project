@@ -223,9 +223,26 @@ const VINES_EDGE = (() => {
   return `${d} L 1200 1100 L -100 1100 Z`;
 })();
 
-export const StreetVesuvius: React.FC<{ stage: Stage }> = ({ stage }) => {
+type Props = {
+  stage: Stage;
+  plume?: number; // 0..1: how far the ash column has grown (overrides the stage); for the eruption
+  pumice?: boolean; // overrides whether stones fall
+};
+
+const CRATER = { x: 540, y: 425 };
+
+export const StreetVesuvius: React.FC<Props> = ({ stage, plume: grow, pumice }) => {
   const frame = useCurrentFrame();
-  const p = STAGES[stage];
+  const base = STAGES[stage];
+  const noStones = pumice === false;
+  const p = {
+    ...base,
+    plume: grow === undefined ? base.plume : grow > 0,
+    pumice: noStones ? "none" : base.pumice,
+    pile: noStones ? 0 : base.pile,
+  };
+  const plumeScale = grow === undefined ? 1 : grow;
+  const flash = grow === undefined ? 0 : Math.max(0, 1 - grow * 4); // bright burst at the very start
   const line = { stroke: p.outline, strokeWidth: 7, strokeLinejoin: "round" as const, strokeLinecap: "round" as const };
   const id = (name: string) => `${name}-${stage}`;
 
@@ -272,14 +289,15 @@ export const StreetVesuvius: React.FC<{ stage: Stage }> = ({ stage }) => {
 
       {/* Ash column */}
       {p.plume && (
-        <>
+        <g transform={`translate(${CRATER.x} ${CRATER.y}) scale(${0.15 + 0.85 * plumeScale} ${plumeScale}) translate(${-CRATER.x} ${-CRATER.y})`}>
           {plume(p.outline, p.outline, 14)}
           {plume(p.smoke, "none", 0)}
           {PLUME_BLOTCHES.map(([cx, cy, r]) => (
             <circle key={cx} cx={cx} cy={cy} r={r} fill={p.smokeBlotch} />
           ))}
-        </>
+        </g>
       )}
+      {flash > 0 && <circle cx={CRATER.x} cy={CRATER.y} r={60 + 260 * (1 - flash)} fill="#fff1c9" opacity={flash} />}
 
       {/* Vesuvius: grey-brown top, vineyards on the lower slopes */}
       <path d={VOLCANO} fill={p.volcano} />

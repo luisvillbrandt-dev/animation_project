@@ -4,6 +4,7 @@ import { EmptyCanvas } from "./EmptyCanvas";
 import { StickmanTest } from "./StickmanTest";
 import { StyleTest } from "./StyleTest";
 import { CaptionsTest, loadCaptionsTest } from "./CaptionsTest";
+import { Episode, EpisodeProps, loadEpisode } from "./Episode";
 import { INTRO_FRAMES, Intro } from "./Intro";
 import { TonyPoses } from "./TonyPoses";
 import { TonyTest } from "./TonyTest";
@@ -12,6 +13,17 @@ import { FPS, HEIGHT, WIDTH } from "./video";
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* The real episode. Pick another one with --props='{"episode":"<id>"}' (npm run render does this). */}
+      <Composition
+        id="Episode"
+        component={Episode}
+        defaultProps={{ episode: "ep01-pompeii-part1", data: null, timing: [], captions: [] } satisfies EpisodeProps}
+        calculateMetadata={loadEpisode}
+        width={WIDTH}
+        height={HEIGHT}
+        fps={FPS}
+        durationInFrames={FPS * 10}
+      />
       <Composition
         id="EmptyCanvas"
         component={EmptyCanvas}
