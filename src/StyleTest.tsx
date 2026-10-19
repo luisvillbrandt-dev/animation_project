@@ -36,7 +36,7 @@ export const StyleTest: React.FC<{ stage: Stage }> = ({ stage }) => {
             scale={BAKER.scale}
             color={INK}
             rim={p.rim}
-            accessory={shot.pillow ? "pillow" : undefined}
+            accessories={shot.pillow ? ["pillow"] : []}
           />
         </g>
 

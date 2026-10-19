@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { EmptyCanvas } from "./EmptyCanvas";
 import { StickmanTest } from "./StickmanTest";
 import { StyleTest } from "./StyleTest";
+import { TonyTest } from "./TonyTest";
 import { FPS, HEIGHT, WIDTH } from "./video";
 
 export const RemotionRoot: React.FC = () => {
@@ -34,6 +35,18 @@ export const RemotionRoot: React.FC = () => {
           height={HEIGHT}
           fps={FPS}
           durationInFrames={FPS * 5}
+        />
+      ))}
+      {(["a", "b", "c"] as const).map((variant) => (
+        <Composition
+          key={variant}
+          id={`TonyTest-${variant}`}
+          component={TonyTest}
+          defaultProps={{ variant }}
+          width={WIDTH}
+          height={HEIGHT}
+          fps={FPS}
+          durationInFrames={FPS * 4}
         />
       ))}
     </>

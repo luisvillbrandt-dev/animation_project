@@ -3,7 +3,7 @@
 // frame by frame. Render it inside an <svg>; x/y is the point between the feet, in pixels.
 import { useCurrentFrame, useVideoConfig } from "remotion";
 
-export const POSES = ["idle", "walking", "running", "pointing", "shocked", "deciding"] as const;
+export const POSES = ["idle", "walking", "running", "pointing", "shocked", "deciding", "waving"] as const;
 export const EXPRESSIONS = [
   "neutral",
   "worried",
@@ -12,9 +12,13 @@ export const EXPRESSIONS = [
   "eager",
   "shocked",
   "asking",
+  "happy",
 ] as const;
 export type Pose = (typeof POSES)[number];
 export type Expression = (typeof EXPRESSIONS)[number];
+
+// Things a stickman can wear or carry. Tony's signature items come from this list.
+export type Accessory = "pillow" | "goggles" | "scarf" | "cap" | "backpack" | "curl" | "watch";
 
 // The face each pose gets when no expression is given.
 export const POSE_FACE: Record<Pose, Expression> = {
@@ -24,6 +28,7 @@ export const POSE_FACE: Record<Pose, Expression> = {
   pointing: "eager",
   shocked: "shocked",
   deciding: "asking",
+  waving: "happy",
 };
 
 type Props = {
@@ -37,7 +42,8 @@ type Props = {
   facing?: "left" | "right";
   seed?: number; // shifts the wobble so two stickmen never move in sync
   rim?: string; // light edge around the figure so he stays visible on dark backgrounds
-  accessory?: "pillow"; // a pillow tied on the head against falling stones
+  accessories?: Accessory[];
+  accent?: string; // color of scarf, cap and similar items
 };
 
 // Body measurements in stickman units (about 222 units tall at scale 1).
@@ -136,6 +142,18 @@ const POSE_ANGLES: Record<Pose, (t: number) => Angles> = {
       frontLeg: [9, 6],
     };
   },
+  waving: (t) => {
+    const b = 2 * wave(t, 0.4);
+    return {
+      lean: 0,
+      head: 4 * wave(t, 0.5),
+      backArm: [-24 + b, -14 + b],
+      // Elbow out to the side so the hand waves next to the head, not across the face.
+      frontArm: [110, 150 + 14 * wave(t, 2.2)],
+      backLeg: [-9, -6],
+      frontLeg: [9, 6],
+    };
+  },
 };
 
 type Point = { x: number; y: number };
@@ -164,8 +182,10 @@ export const Stickman: React.FC<Props> = ({
   facing = "right",
   seed = 0,
   rim = "none",
-  accessory,
+  accessories = [],
+  accent = "#e2483d",
 }) => {
+  const has = (item: Accessory) => accessories.includes(item);
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps + seed;
@@ -218,15 +238,39 @@ export const Stickman: React.FC<Props> = ({
           </filter>
         </defs>
       )}
+      {has("backpack") && <Backpack shoulder={{ x: shoulder.x, y: shoulder.y + dy }} t={t} color={color} />}
       <polyline points={toPoints(backLeg, dy)} {...line} />
       <polyline points={toPoints(frontLeg, dy)} {...line} />
       <polyline points={toPoints([hip, neck], dy)} {...line} />
+      {has("scarf") && <Scarf neck={{ x: neck.x, y: neck.y + dy }} t={t} color={color} accent={accent} />}
       <g transform={`translate(${head.x} ${head.y + dy}) rotate(${a.lean + a.head})`}>
         <circle r={HEAD_R} fill={headFill} stroke={color} strokeWidth={STROKE} />
         <g transform={`scale(${FACE_SCALE})`}>
           <Face expression={expression} color={color} fill={headFill} />
         </g>
-        {accessory === "pillow" && (
+        {has("curl") && (
+          <path d="M -2 -38 C -8 -60 16 -66 20 -52 C 23 -42 8 -42 10 -50" fill="none" stroke={color} strokeWidth={6} strokeLinecap="round" />
+        )}
+        {has("cap") && (
+          <g stroke={color} strokeLinejoin="round" strokeLinecap="round">
+            <path d="M -33 -14 Q -33 -48 0 -48 Q 33 -48 33 -14 Z" fill={accent} strokeWidth={6} />
+            <path d="M 20 -15 L 58 -9" strokeWidth={10} />
+            <circle cx={0} cy={-48} r={4} fill={accent} strokeWidth={3} />
+          </g>
+        )}
+        {has("goggles") && (
+          <g stroke={color} strokeLinecap="round">
+            <path d="M -37 -16 Q 0 -32 37 -16" fill="none" stroke={STRAP} strokeWidth={7} />
+            <path d="M -3 -31 L 3 -31" strokeWidth={5} />
+            {[-14, 14].map((cx) => (
+              <g key={cx}>
+                <circle cx={cx} cy={-31} r={11} fill={LENS} strokeWidth={5} />
+                <circle cx={cx - 4} cy={-35} r={2.8} fill="#ffffff" stroke="none" />
+              </g>
+            ))}
+          </g>
+        )}
+        {has("pillow") && (
           <g transform={`translate(-6 ${-HEAD_R - 14}) rotate(-6)`}>
             <rect x={-46} y={-15} width={92} height={30} rx={14} fill={PILLOW} stroke={color} strokeWidth={5} />
             <path d="M -30 0 L 30 0" stroke={color} strokeWidth={3} strokeLinecap="round" strokeDasharray="2 8" />
@@ -235,6 +279,61 @@ export const Stickman: React.FC<Props> = ({
       </g>
       <polyline points={toPoints(backArm, dy)} {...line} />
       <polyline points={toPoints(frontArm, dy)} {...line} />
+      {has("watch") && <Watch arm={frontArm.map((p) => ({ x: p.x, y: p.y + dy }))} t={t} color={color} />}
+    </g>
+  );
+};
+
+const STRAP = "#6b4a2b";
+const LENS = "#9fd8ef";
+const DEVICE_GLOW = "#5ee6f0"; // the light of Tony's time machine
+
+// A scarf wrapped around the neck, two ends fluttering behind him.
+const Scarf: React.FC<{ neck: Point; t: number; color: string; accent: string }> = ({ neck, t, color, accent }) => {
+  const f = Math.sin(t * 2 * Math.PI * 1.4);
+  const tails = [
+    `M ${neck.x - 6} ${neck.y + 10} q -28 ${10 + 6 * f} -58 ${6 + 12 * f}`,
+    `M ${neck.x - 4} ${neck.y + 12} q -20 ${18 + 4 * f} -40 ${22 + 8 * f}`,
+  ];
+  return (
+    <g strokeLinecap="round" fill="none">
+      {tails.map((d) => (
+        <path key={d} d={d} stroke={color} strokeWidth={17} />
+      ))}
+      {tails.map((d) => (
+        <path key={d} d={d} stroke={accent} strokeWidth={10} />
+      ))}
+      <ellipse cx={neck.x} cy={neck.y + 6} rx={22} ry={9} fill={accent} stroke={color} strokeWidth={5} />
+    </g>
+  );
+};
+
+// A small backpack with an antenna that glows: the time machine.
+const Backpack: React.FC<{ shoulder: Point; t: number; color: string }> = ({ shoulder, t, color }) => {
+  const pulse = 0.55 + 0.45 * Math.sin(t * 2 * Math.PI * 1.2);
+  const x = shoulder.x - 48;
+  const y = shoulder.y + 2;
+  return (
+    <g stroke={color} strokeLinecap="round" strokeLinejoin="round">
+      <path d={`M ${x + 8} ${y} L ${x - 8} ${y - 34}`} strokeWidth={5} />
+      <circle cx={x - 10} cy={y - 38} r={14} fill={DEVICE_GLOW} opacity={0.35 * pulse} stroke="none" />
+      <circle cx={x - 10} cy={y - 38} r={6} fill={DEVICE_GLOW} strokeWidth={3} />
+      <rect x={x} y={y} width={30} height={52} rx={8} fill="#3f8f8a" strokeWidth={5} />
+      <path d={`M ${x + 6} ${y + 18} L ${x + 24} ${y + 18}`} strokeWidth={3} />
+    </g>
+  );
+};
+
+// A big glowing wristwatch near the hand: the time machine.
+const Watch: React.FC<{ arm: Point[]; t: number; color: string }> = ({ arm, t, color }) => {
+  const [, elbow, hand] = arm;
+  const at = { x: elbow.x + (hand.x - elbow.x) * 0.78, y: elbow.y + (hand.y - elbow.y) * 0.78 };
+  const pulse = 0.55 + 0.45 * Math.sin(t * 2 * Math.PI * 1.2);
+  return (
+    <g>
+      <circle cx={at.x} cy={at.y} r={18} fill={DEVICE_GLOW} opacity={0.4 * pulse} />
+      <circle cx={at.x} cy={at.y} r={9} fill="#ffd34d" stroke={color} strokeWidth={4} />
+      <circle cx={at.x} cy={at.y} r={3} fill={DEVICE_GLOW} />
     </g>
   );
 };
@@ -246,6 +345,7 @@ const FX = 3;
 const EYE = 8; // horizontal distance of each eye from the face center
 const SWEAT = "#7cc4e8";
 const PILLOW = "#efe4cf";
+const CHEEK = "#f4a3a0";
 
 const Face: React.FC<{ expression: Expression; color: string; fill: string }> = ({
   expression,
@@ -356,6 +456,18 @@ const Face: React.FC<{ expression: Expression; color: string; fill: string }> = 
               />
             );
           })}
+        </g>
+      );
+
+    case "happy":
+      // Smiling eyes, a big open smile and rosy cheeks: Tony greeting the viewer.
+      return (
+        <g>
+          <path d={`M ${L - 4} -2 Q ${L} -9 ${L + 4} -2`} {...thin} />
+          <path d={`M ${R - 4} -2 Q ${R} -9 ${R + 4} -2`} {...thin} />
+          <circle cx={L - 3} cy={5} r={3.2} fill={CHEEK} />
+          <circle cx={R + 3} cy={5} r={3.2} fill={CHEEK} />
+          <path d={`M ${FX - 9} 6 Q ${FX} 21 ${FX + 9} 6 Z`} fill={color} stroke={color} strokeWidth={2} strokeLinejoin="round" />
         </g>
       );
 
