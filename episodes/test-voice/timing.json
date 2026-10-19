@@ -3,18 +3,18 @@
     "line": 1,
     "text": "You are a baker in Pompeii, in the year 79 AD.",
     "start": 0.15,
-    "end": 4.189
+    "end": 3.974
   },
   {
     "line": 2,
     "text": "Just after midday, the ground starts to shake.",
-    "start": 4.539,
-    "end": 7.542
+    "start": 4.324,
+    "end": 7.162
   },
   {
     "line": 4,
     "text": "What do you do?",
-    "start": 8.442,
-    "end": 9.582
+    "start": 8.062,
+    "end": 9.16
   }
 ]
