@@ -48,12 +48,17 @@ Video language: English.
     Episode.tsx       reads scenes.json + timing.json + captions.json
 /scripts/             voice generation, caption generation
 /out/                 rendered MP4s, named <episode-id>-v1.mp4, -v2.mp4 ...
+/out/review/          still frames the reviewer renders for inspection
 /notes/iteration-log.md
+/notes/facts/         fact-check notes and research briefs, one file per episode
+/.backup/             copies of files the improver made before it edited them
+/.claude/agents/      episode-reviewer.md, episode-improver.md, history-fact-checker.md
 ```
 
 ## How voice and timing work
 1. Generate the voice per script line (so every line has an exact start and end time).
-2. Join the lines with short pauses into voice.wav and write timing.json.
+2. Join the lines with short pauses into voice.wav and write timing.json, a list in seconds like
+   `[{ "line": 1, "text": "...", "start": 0.0, "end": 3.2 }]`.
 3. Run Whisper on voice.wav only for word-level caption timing.
 4. Scene durations come from timing.json, never from guesses.
 
@@ -95,20 +100,45 @@ end of its last line.
 - [ ] The first 3 seconds contain the hook and a moving image.
 - [ ] The A/B question is clear and both options sound reasonable.
 - [ ] It renders without warnings or errors.
-- [ ] Facts marked "verify" in the script are listed in /notes/iteration-log.md for me to check.
+- [ ] Every factual claim was checked by history-fact-checker (notes/facts/<episode-id>.md), or is
+      listed there as open for me to check.
 
-## Iteration protocol
-After every render:
-1. Run the checklist and append the result to /notes/iteration-log.md.
-2. List the 5 weakest points of the video, ranked.
-3. Propose fixes for the top 2 and wait for my OK.
-4. Save the new render as the next version (v2, v3). Never overwrite an old version.
+## Agents (project subagents in .claude/agents/)
+- **episode-reviewer**: the controller. Runs the checks and the checklist above, looks at still
+  frames, reads script and timing, ranks the 5 weakest points and proposes fixes. It never edits
+  episode files.
+- **episode-improver**: the implementer. Applies only approved fixes, one at a time, and renders a
+  new version (v2, v3 ...). It never overwrites older versions and never grades its own work.
+- **history-fact-checker**: the historian. Checks every factual claim in the script against reliable
+  web sources, rates it (confirmed / likely / disputed / legend / unsupported), suggests safe
+  wording, and can write a research brief for a new episode. It never edits the script; it only
+  writes notes/facts/<episode-id>.md.
+Subagents cannot ask me questions. If they need a decision they return it as NEEDS DECISION, and the
+main session asks me.
+
+### Loop (default: manual)
+1. After EVERY render, run episode-reviewer without asking me.
+2. Show me a short summary: verdict, top 2 problems, proposed fixes. The full report goes to
+   /notes/iteration-log.md. If the reviewer lists claims under VERIFY, or before I record a new
+   script, also run history-fact-checker and show me what it would change (keep / reword / cut).
+   Script wording only changes with my OK.
+3. I answer e.g. "OK 1", "OK both", or give my own change.
+4. Run episode-improver with ONLY the approved items. One change = one new version.
+5. Run episode-reviewer on the new version and compare it with the previous one. Tell me plainly
+   whether it got better, worse or stayed the same, and why.
 Change ONE thing at a time (hook, voice speed, caption style, pacing) so I can see what helped.
+
+### Auto mode (only when I say so, e.g. "auto, 3 rounds")
+Repeat the loop for the number of rounds I named (max 3), taking the reviewer's top fix each time
+without asking me. Allowed: pacing, camera, scene order, stickman poses and expressions, caption
+style, voice speed. NOT allowed: rewriting script text, new downloads, anything paid, anything that
+breaks the hard constraints. Stop early if a round makes the video worse (go back to the better
+version) or if an agent returns NEEDS DECISION. history-fact-checker may run in auto mode, but its
+findings only come to me and never change the script by themselves. At the end give me a short
+summary: what changed per version and which version I should post.
 
 ## Commands (update this section as the project grows)
 - Preview in browser: `npm run dev`
 - Render an episode: `npm run render -- <episode-id>`
 - Generate voice: `npm run voice -- <episode-id>`
 - Generate captions: `npm run captions -- <episode-id>`
-- Check the code for type errors: `npm run typecheck`
-- Shared video settings (size, fps, safe area): `src/video.ts`

@@ -1,8 +1,12 @@
 # Pilot prompts: Pompeii, Part 1
 
 How to use this:
-1. Create a new empty folder (e.g. `decisions-shorts`) and put `CLAUDE.md` in it.
-2. Open a terminal in that folder and start Claude Code with `claude`.
+1. Create a new empty folder (e.g. `decisions-shorts`) and unzip the setup package into it, so that
+   `CLAUDE.md` sits directly in that folder. The package also contains this file and the three agents
+   in `.claude/agents/` (a folder starting with a dot is hidden by default on Mac and Windows;
+   Mac: Cmd+Shift+. in Finder shows it).
+2. Open a terminal in that folder and start Claude Code with `claude`. If Claude Code was already
+   running, quit and start it again so it loads the agents.
 3. Paste ONE prompt at a time. Only go to the next one when the "Done when" check is true.
 4. After each working step, ask Claude Code to commit. If something breaks, say so before moving on.
 5. Between phases you can type `/clear` to keep the session clean. CLAUDE.md is re-read automatically.
@@ -15,8 +19,10 @@ How to use this:
 Read CLAUDE.md. Do not change anything yet. Check my computer: operating system, Node.js version,
 Python version, git, and whether espeak-ng is installed. Tell me in a short list what is
 installed, what is missing, and the exact steps to fix each missing thing for my system.
+Also confirm that the three subagents episode-reviewer, episode-improver and history-fact-checker
+are available.
 ```
-Done when: you have a list and everything missing is installed.
+Done when: you have a list, everything missing is installed, and typing `/agents` shows all three agents.
 
 ## Prompt 1: Create the project
 
@@ -63,6 +69,16 @@ Tell me the total voice length. If it is over 90 seconds, suggest where to short
 ```
 Done when: voice length is 80-90 s.
 
+## Prompt 4b: Fact-check the script (before you record the final voice)
+
+```
+Use the history-fact-checker on ep01-pompeii-part1. Check every factual claim in script.txt, rate
+it, and tell me which lines to keep, reword or cut, with suggested wording and sources. Do not
+change the script.
+```
+Done when: every claim is rated and you have decided what to change. If you change script lines,
+run the voice step again (and the caption step, if you already did it).
+
 ## Prompt 5: Captions
 
 ```
@@ -85,15 +101,26 @@ version to out/ep01-pompeii-part1-v1.mp4 and tell me where it is.
 ```
 Done when: you have a v1 MP4 that plays from start to finish. Do not expect it to look good yet.
 
-## Prompt 7: Review and improve (use this prompt after every render)
+## Prompt 7: Review and improve with reviewer and improver (use after every render)
 
+Step 1, check (the reviewer changes nothing):
 ```
-Check the latest render: render still frames at 5 key moments (first second, a caption moment,
-a scene change, the choice, the vote card) and look at them. Then run the quality checklist from
-CLAUDE.md and append the result to notes/iteration-log.md. List the 5 weakest points of v1,
-ranked by impact on viewer retention. Propose fixes for the top 2 only and wait for my OK.
+Use the episode-reviewer on ep01-pompeii-part1, latest version. Show me the verdict and the top 2
+problems with proposed fixes. Do not change anything yet.
 ```
-Then say "OK, do fix 1" (or give your own feedback) and ask for a v2 render. Repeat.
+Step 2, approve (answer in your own words), for example:
+```
+OK, fix 1 only. Use the episode-improver for it, then run the episode-reviewer on the new version
+and tell me if it got better.
+```
+Repeat steps 1-2. Each approved change becomes its own version (v2, v3 ...), so you can see what
+helped. You can also give your own idea instead of "fix 1".
+
+Step 3, optional autopilot (only for small tweaks; it will not rewrite your script):
+```
+Auto mode, 3 rounds on ep01-pompeii-part1, as described in CLAUDE.md.
+```
+It stops early if a version gets worse, and at the end tells you which version to post.
 
 Ideas for what to improve, one at a time:
 - Hook: does the first sentence stop the scroll? Try a version that starts with the danger.
@@ -101,6 +128,15 @@ Ideas for what to improve, one at a time:
 - Voice speed and pauses before the choice.
 - Caption style: color of the highlighted word, size, position.
 - Vote card: clearer A/B, shorter option text.
+
+## Prompt 8: Research brief for the next episode
+
+```
+Use the history-fact-checker in BRIEF mode for: <topic, e.g. "Titanic, night of the sinking, a
+passenger's decision about the lifeboats">. I want a timeline, what is documented vs. legend, two
+or three real A/B decision moments with what actually happened, vivid documented details, a
+text-to-speech pronunciation list and sources. Do not write script text; I write the script myself.
+```
 
 ---
 
