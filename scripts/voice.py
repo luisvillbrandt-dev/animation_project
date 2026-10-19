@@ -21,6 +21,7 @@ Voices (the first letter is the accent: a = American, b = British; the second: m
   bm_george, bm_lewis, bm_daniel, bm_fable
   af_heart, af_bella, af_nicole, af_sarah, bf_emma, bf_isabella
 Blend two voices with "+", e.g. am_michael+am_onyx (works in voice.config.json too).
+Force the accent with a prefix: "b:am_michael" speaks Michael's voice with British pronunciation.
 """
 
 import argparse
@@ -76,7 +77,10 @@ class Speaker:
         self._pipelines = {}
 
     def say(self, text, voice, speed):
-        lang = voice[0]  # "a" = American English, "b" = British English
+        # The accent comes from the first letter of the voice ("a" = American, "b" = British),
+        # unless it is given in front: "b:am_michael" = Michael's voice with British pronunciation.
+        lang, _, voice = voice.rpartition(":")
+        lang = lang or voice[0]
         if lang not in self._pipelines:
             self._pipelines[lang] = self._pipeline_class(lang_code=lang, repo_id="hexgrad/Kokoro-82M")
         # "am_michael+am_onyx" blends voices; Kokoro averages comma-separated voices.
@@ -138,7 +142,7 @@ def main():
         for sample_voice in [v.strip() for v in args.samples.split(",") if v.strip()]:
             clips = [speaker.say(text, sample_voice, speed) for _, text, _ in lines]
             audio, _ = join(clips, lines, config)
-            out = samples_dir / f"{sample_voice}_speed{speed}.wav"
+            out = samples_dir / f"{sample_voice.replace(':', '-')}_speed{speed}.wav"  # ":" is not allowed in file names
             sf.write(out, audio, SAMPLE_RATE)
             print(f"{sample_voice:<12} {len(audio) / SAMPLE_RATE:5.1f} s  -> {out.relative_to(ROOT)}")
         return
