@@ -155,3 +155,140 @@ Still needed in caption/description: the baker and family are invented, the even
 3. Add the cheap authenticity details: pumice piling on kerb and stepping stones, round bread with radial cuts, cushion tied to a runner's head, oil lamp in the dark scenes?
 4. Neighbors run AWAY from the mountain toward the sea side: OK as framing?
 5. Season: stay neutral (recommended) or commit to autumn (cloaks, braziers)?
+
+## Script check: draft (2026-10-19)
+
+Script checked: episodes/ep01-pompeii-part1-draft/script.txt (27 lines; line numbers below are file line numbers, empty lines counted). The baker, wife and daughter are invented and not checked. Findings from the "Visual check" section above are reused where marked "(see Visual check 5x)"; new research is listed per claim. WebFetch returns a short machine summary of each page, so figures are as reported by that summary.
+
+### Key timeline used for this check (all times approximate)
+- About 1 pm, day 1: Plinian eruption starts after a small opening explosion; white pumice begins to fall on Pompeii about the same time (Sigurdsson 1985 abstract; Tulane lecture page; Sparice 2024).
+- White pumice about 7 h, then grey pumice; whole fall about 18-19 h (Sigurdsson 1985; Sparice 2024).
+- About 15 cm of pumice per hour; most roof collapses a few hours in, at 40-60 cm (Sparice 2024). The Tulane page estimates roofs at risk by about 5 pm (estimate, not a record).
+- Early morning, day 2: first surge to reach Pompeii (surge 4): about 7 am (Sigurdsson 1985 abstract); about 6:30 (Tulane page); about 8 am for the caldera-forming current (Sparice 2024). Safe summary: "early morning, around 7".
+- Victims: 1,150 found at Pompeii; 394 in the pumice-fall layer (died mostly when roofs and walls collapsed); 650 in the surge deposits (day 2); most inhabitants left during the first phase (Luongo et al. 2003 abstract).
+
+### CLAIMS
+
+1. "By tomorrow morning, this whole city will be gone." (line 1) | timing LIKELY, "gone" overstated | REWORD
+- Timing: the surges that killed those still in Pompeii arrived in the early morning of day 2 (about 7 am), after about 3 m of pumice had already buried the city (Sigurdsson 1985 abstract; Luongo 2003 abstract; Tulane). The Wikipedia 79 article attributes the destruction of Pompeii to surges 4 and 5 and a surge layer about 1.8 m thick. Because the line is relative ("tomorrow morning"), the open date debate (24 Aug vs. autumn) does not matter.
+- "Gone" overstates: the city was buried, not erased (it was excavated again later; that last point is from general knowledge, not an opened source, so do not rely on it). Most people had also already left.
+- Suggested wording: "By tomorrow morning, this whole city will be buried."
+- Sources opened: https://digitalcommons.uri.edu/gsofacpubs/1114 ; https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES ; https://www2.tulane.edu/~sanelson/Natural_Disasters/volccasehist.htm ; https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full ; https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD
+
+2. "It's the year 79 AD." (line 2) | CONFIRMED | KEEP
+- The year is not in doubt; the debate is about month and day (see 5g above). The Sigurdsson 1985 and Luongo 2003 abstracts both say AD 79.
+- Wording: keep as is. Do not add "24 August".
+- Sources: https://digitalcommons.uri.edu/gsofacpubs/1114 ; https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES ; https://archaeology.org/news/2018/10/16/181016-pompeii-date-inscription/ (opened earlier)
+
+3. "Just after midday, the ground shakes." (line 4) | "just after midday" CONFIRMED; "the ground shakes" at that moment UNSUPPORTED | REWORD
+- Start "shortly after noon": Sigurdsson 1985 abstract; Tulane (about 1 pm); Pliny 6.16 (seventh hour); see Visual check 5b.
+- Earthquakes: small tremors in the days before (not taken as warning), shaking during the eruption including a major quake in the afternoon that collapsed walls (Wikipedia 79 article); Pliny 6.20 for Misenum: tremors for days, much stronger that night. No source says the ground shook at the moment the eruption began.
+- Suggested wording: "Just after midday, Vesuvius erupts." Or, to keep the tremor image: "The ground has trembled for days. Now, just after midday, Vesuvius erupts."
+- Sources: https://www.attalus.org/old/pliny6.html ; https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD ; https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full ; https://digitalcommons.uri.edu/gsofacpubs/1114
+
+4. "Then a thunderclap rolls down from Mount Vesuvius." (line 5) | an explosion LIKELY; the "thunderclap" sound UNSUPPORTED | REWORD
+- The Sigurdsson 1985 abstract says the Plinian phase began after a small phreatomagmatic explosion (water meeting magma), so an opening blast is real, but it is described as small. No eyewitness describes any sound; Pliny 6.16 only mentions the cloud being pointed out. A loud bang 8 km away is a reasonable inference, nothing more.
+- Suggested wording: "Then Vesuvius explodes." (safest) or "Then a huge blast from Mount Vesuvius."
+- Sources: https://digitalcommons.uri.edu/gsofacpubs/1114 ; https://www.attalus.org/old/pliny6.html
+
+5. "A column of ash and smoke shoots miles into the sky." (line 6) | CONFIRMED | KEEP
+- Column height: 15 to 30 km (Wikipedia 79 article, as fetched today); "more than 20 km" (Harvard exhibition page). That is about 9 to 19 miles, so "miles" is safe. Note: Visual check 5a quoted a peak of about 33 km from Wikipedia; the page now reports 15-30 km. Do not put a number in the script.
+- Sources: https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD ; https://archive.blogs.harvard.edu/wheredisasterstrikes/volcano/vesuvius-79-c-e (unsigned exhibition blog, secondary)
+
+6. "It spreads out like a giant tree." (line 7) | CONFIRMED | KEEP
+- Pliny the Younger, letter 6.16: pine-tree shape (see Visual check 5a). Optional: "like a giant pine tree" is closer to the source.
+- Source: https://www.attalus.org/old/pliny6.html
+
+7. "Nobody here knows what this is." (line 8) | LIKELY for ordinary people, DISPUTED for educated people | REWORD
+- Some ancient writers (Strabo, Vitruvius, Diodorus) seem to have understood that the mountain was volcanic in nature (Scientific American geology blog), but they did not treat it as a threat. Strabo describes burned-looking rock and compares it with Etna. Pliny 6.16 says even observers across the bay could not tell which mountain the cloud rose from. Tremors in the days before were not taken as warnings (Wikipedia 79 article). The Harvard exhibition page says residents were "taken by surprise". I found no source on what ordinary Pompeians believed Vesuvius was. (A Project MUSE article on this topic could not be opened: only a verification page loaded.)
+- "Nobody ... knows" is too absolute. Suggested wording: "Nobody here expects a volcano." or "No one saw this coming."
+- Sources: https://www.scientificamerican.com/blog/history-of-geology/pompeii-a-geological-movie-review-introducing-the-main-character ; https://www.attalus.org/old/pliny6.html ; https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD ; https://archive.blogs.harvard.edu/wheredisasterstrikes/volcano/vesuvius-79-c-e
+
+8. "An hour later, small white stones start falling." (line 9) | "an hour later" UNSUPPORTED (sources show no delay); "small white stones" CONFIRMED | REWORD
+- Pumice fall at Pompeii began about 1 pm, about the same time the column rose (Tulane page: ash began falling in Pompeii about 1 pm; Sparice 2024: white pumice from about 1 pm; Sigurdsson 1985: white pumice fall followed the start of the Plinian phase shortly after noon and lasted about 7 h). No source gives the lag between column and first fall at Pompeii. Pliny's "seventh hour" is when the cloud was first pointed out at Misenum, not when pumice reached Pompeii.
+- White pumice up to about 3 cm (Wikipedia 79 article; single source for size).
+- Suggested wording: "Soon after, small white stones start falling." (hedged, no number)
+- Sources: https://www2.tulane.edu/~sanelson/Natural_Disasters/volccasehist.htm ; https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full ; https://digitalcommons.uri.edu/gsofacpubs/1114 ; https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD
+
+9. "Pumice. Light. Almost harmless." (line 10) | "light" LIKELY; "almost harmless" misleading | REWORD
+- Pliny 6.16 calls the falling stones light and partly burnt (that is why the uncle's party judged going outdoors acceptable). But the pile killed: 394 victims lay in the pumice-fall layer, mostly killed when roofs and walls collapsed under the weight (Luongo 2003 abstract), and roofs failed at about 40-60 cm (Sparice 2024). The line also clashes with lines 17-23 (the beam creaks). Pliny's party tied pillows to their heads against the stones.
+- Suggested wording: "Pumice. Light. Not dangerous, at first." or "Pumice. Light. It looks harmless."
+- Sources: https://www.attalus.org/old/pliny6.html ; https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES ; https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full
+
+10. "They rattle on the roof tiles like hail." (line 11) | LIKELY (size fits; the sound is a simile, not documented) | KEEP
+- White pumice pieces up to about 3 cm (Wikipedia 79 article) are the size of large hail; Sparice 2024 calls the lapilli coarse and angular. Pompeii roofs were tile roofs (see Visual check 2b). No source describes the noise, so this is an image, not a historical claim.
+- Wording: keep.
+- Sources: https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD ; https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full
+
+11. "The sky turns grey. The afternoon feels like evening." (line 12) | LIKELY (darkening); UNSUPPORTED (exact time and colour at Pompeii) | KEEP (small hedge optional)
+- No eyewitness account from Pompeii. Darkness is documented at Stabiae (6.16) and Misenum (6.20), later (night and day 2). Pompeii was on the main fallout axis near the base of the column, so a dimmed afternoon is likely but the hour is not recorded (see Visual check 5e). A Harvard exhibition page says Pompeii fell into darkness at midday (single vague secondary source, not relied on). Pliny says the cloud was white at first, then dirty/blotchy; "grey" is a fair colour for a fall of pumice and ash.
+- Suggested wording: keep. Safer variant: "The sky darkens. The afternoon feels like evening."
+- Sources: https://www.attalus.org/old/pliny6.html ; https://archive.blogs.harvard.edu/wheredisasterstrikes/volcano/vesuvius-79-c-e ; https://www2.tulane.edu/~sanelson/Natural_Disasters/volccasehist.htm
+
+12. "Your neighbors are already running for the harbor." (line 13) | fleeing LIKELY; "for the harbor" UNSUPPORTED | REWORD
+- Most inhabitants left the city during the first (pumice-fall) phase (Luongo 2003 abstract); the Western Australian Museum article says residents had about 18 hours to escape. Where they went: a forensic anthropologist quoted in an Open Culture article (secondary, citing a Wired interview) says written records suggest most successful escapees went north by road, and that most bodies of people who left too late were found to the south; survivors later resettled in Cumae, Naples, Ostia, Puteoli (same article, citing Live Science). The same article says the TED-Ed animation shows a different land route, so treat this as LIKELY at best.
+- The harbour: Pompeii's port location is not known with certainty (candidates: Sarno mouth, a lagoon or river bend southwest of the city, a second port near the Porta Stabia; the Porta Marina wall once thought a quay was shown not to be one). Sea escape that day: at Stabiae the sea was too rough and the shore blocked by debris (Pliny 6.16); floating pumice and a shallowed seabed kept rescue ships from landing (Western Australian Museum, secondary). No source documents a boat leaving Pompeii.
+- Suggested wording: "Your neighbors are already running for the city gates." or "Your neighbors are already leaving the city."
+- Sources: https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES ; https://www.romanports.org/en/articles/ports-in-focus/625-the-port-of-pompeii.html (unsigned, 2019) ; https://museum.wa.gov.au/explore/articles/voyage-catastrophe-pompeii-and-roman-navy ; https://www.openculture.com/2021/05/how-the-survivors-of-pompeii-escaped-mount-vesuvius-deadly-eruption.html ; https://www.attalus.org/old/pliny6.html
+
+13. "Some tie pillows to their heads against the stones." (line 14) | CONFIRMED at Stabiae; LIKELY for Pompeii; timing mismatch | REWORD
+- Pliny 6.16 (Stabiae): the uncle's party went outdoors because the buildings were shaking and the pumice was light, and tied pillows on with cloths. This happened that NIGHT, after the courtyard had filled, while it was still dark there, not in the early afternoon. Not documented for Pompeii. The draft places it right after the first fall begins (about 2-3 pm).
+- Suggested wording: move it later (after the "knee-deep" line), or generalise: "Along this coast, people tie pillows to their heads against the stones."
+- Source: https://www.attalus.org/old/pliny6.html
+
+14. "Inside your house, you're protected from the falling stones." (line 17; "walls thick, doors strong", line 18) | LIKELY, true only at first | REWORD (light)
+- Roofs held for some hours: collapses came a few hours in, at 40-60 cm of deposit (about 4-5 pm at 15 cm/h, my arithmetic), and some roofs shed the pumice because of their slope (Sparice 2024). So in the late afternoon "protected" is true for now. As an absolute statement it is wrong: the 394 victims in the pumice layer died indoors, mostly from roof and wall collapse (Luongo 2003). "Walls thick, doors strong" is generic; no source opened.
+- Suggested wording: "For now, inside your house, you're protected from the stones." (sets up "But the stones keep coming.")
+- Sources: https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full ; https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES
+
+15. "They pile up on the roof. Hour after hour. Outside, they are already knee-deep." (lines 20-21) | LIKELY | KEEP
+- Fall rate about 15 cm per hour on average; 40-60 cm after a few hours (Sparice 2024). Knee height is about 50 cm, which matches roughly 3 to 4 hours into the fall (about 4-5 pm; my arithmetic from the 15 cm/h rate). Sources do not give street-level depths by hour; drifts and sheltered spots vary. If the line is meant to come later (evening or night), "knee-deep" would understate: after 7 h of white pumice the layer would be about 1 m (my arithmetic). By day 2 morning the pile was about 3 m.
+- Wording: keep. Optional: "Outside, it's already up to your knees."
+- Sources: https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full ; https://digitalcommons.uri.edu/gsofacpubs/1114 (7 h of white pumice)
+
+16. "Your daughter asks if the gods are angry." (line 22) | LIKELY (plausible; light check) | KEEP
+- Pliny 6.20 (Misenum, that night): some raised their hands to the gods, others insisted there were no gods left and that this was an eternal night for the world. The Harvard exhibition page also says some believed the gods were gone. Fear in religious terms is documented; the exact "angry gods" wording is not, but it fits. It is the invented daughter's line, not a historical claim.
+- Optional closer-to-source wording: "Your daughter asks if the gods have left us."
+- Sources: https://www.attalus.org/old/pliny6.html ; https://archive.blogs.harvard.edu/wheredisasterstrikes/volcano/vesuvius-79-c-e
+
+17. "The ground shakes again. The roof beam above you creaks." (line 23) | LIKELY | KEEP
+- Shaking during the eruption is documented: quake damage to walls in the afternoon (Wikipedia 79 article); a Plinian-phase earthquake collapsing buildings in Pompeii (same); possible tremors through the 18 h fall (Sparice 2024); strong shocks at Misenum that night and houses shaking at Stabiae (Pliny 6.20, 6.16). "Again" only works if the first shake is true (see claim 3); if line 4 is reworded to drop the shaking, use "The ground shakes." The beam: pumice load plus shaking is what brought roofs down (see Visual check 5d).
+- Sources: https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD ; https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2024.1386960/full ; https://www.attalus.org/old/pliny6.html
+
+18. "Option A: run for the harbor, into the chaos." (line 26) | realistic choice LIKELY; outcome at Pompeii UNSUPPORTED | REWORD
+- Realistic: yes. Most Pompeians who survived left during the first phase (Luongo 2003 abstract). The same dilemma, stay in the house or go out under the stones, is documented for Pliny's party at Stabiae (6.16).
+- Problem is the harbor: the port location is unknown (see claim 12), no source documents any boat leaving Pompeii, and the one documented attempt in this bay (Stabiae, 6.16) failed because of rough sea and debris. Navy rescue ships also could not land (Western Australian Museum, secondary).
+- Suggested wording: "Option A: run for the gates, out of the city." Or keep the sea idea with a hedge: "Option A: run for the sea."
+- Sources: https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES ; https://www.attalus.org/old/pliny6.html ; https://museum.wa.gov.au/explore/articles/voyage-catastrophe-pompeii-and-roman-navy ; https://www.romanports.org/en/articles/ports-in-focus/625-the-port-of-pompeii.html
+
+19. "Option B: stay inside and wait it out." (line 27) | realistic choice LIKELY | KEEP
+- Realistic for the afternoon: roofs held for some hours (Sparice 2024), and Pliny's party also first slept indoors. Known outcome for people who stayed: 394 victims in the pumice-fall layer died mainly from roof and wall collapse; 650 victims in the surge layers on day 2 (49% on roads, 51% in buildings) (Luongo 2003 abstract). Body positions suggest some people survived a first surge (same abstract).
+- Source: https://geotechpedia.com/Publication/Show/4304/IMPACT-OF-THE-AD-79-EXPLOSIVE-ERUPTION-ON-POMPEII--II--CAUSES-OF-DEATH-OF-THE-INHABITANTS-INFERRED-BY-STRATIGRAPHIC-ANALYSIS-AND-AREAL-DISTRIBUTION-OF-THE-HUMAN-CASUALTIES
+
+### Part 2: can it reveal what happened to each choice?
+- Option B (stay): documented at population level. Deaths under collapsing roofs during the pumice fall (394 victims) and deaths in the day-2 surges (650 victims). Enough for an honest reveal: many who stayed died when roofs gave way, or when the surge hit at about 7 am.
+- Option A (run): documented that most inhabitants left in the first phase and survived (Luongo 2003; Western Australian Museum); secondary sources say most escapees went by road, many to Naples, Cumae, Ostia, Puteoli. By SEA from Pompeii: not documented, and the Stabiae attempt failed. If Option A stays "harbor", Part 2 cannot honestly say people reached boats; it can say the sea route was blocked in this bay and most survivors left by road. If Option A becomes "run out of the city", Part 2 can say most who left early survived. Individual outcomes cannot be known (no record of any baker's fate).
+- Both options carry real danger on day 1: leaving meant walking through falling stones (pillows) in a dim afternoon.
+
+### WEAK SPOTS (new)
+- Time between column and first pumice at Pompeii: sources say only "about 1 pm", no lag given; "an hour later" has no support.
+- No eyewitness from Pompeii; darkness hour, the sound of the pumice and the opening bang are inferences.
+- Location of the harbour and any escape by sea from Pompeii: no documentation; secondary sources only (Western Australian Museum, Open Culture quoting a Wired interview, unsigned romanports.org).
+- Surge arrival time varies by source: 6:30 (Tulane lecture page, undated), about 7 (Sigurdsson abstract), about 8 (Sparice, caldera-forming current). Say "early morning".
+- Column height: Wikipedia now gives 15-30 km; earlier notes had 33 km. No number in the script, so no risk.
+- Not opened: Project MUSE article on Greek and Roman discourse about Vesuvius (verification page only); EBSCO page (search snippet only, not rated).
+- Knee-deep timing is my arithmetic from 15 cm/h, not a documented figure.
+
+### FICTION NOTE (draft)
+Needed in caption/description: the baker and his family are invented, the events are real. Suggested: "The baker is fictional. The eruption of Vesuvius in 79 AD is real."
+
+### NEEDS DECISION (for Luis)
+1. Line 1: "gone" or "buried"? (Recommended: "buried".)
+2. Line 5: replace "thunderclap" with a plain "explodes"? (Recommended: yes; no source for the sound.)
+3. Line 9: change "An hour later" to "Soon after"? (Recommended: yes.)
+4. Lines 13 and 26: keep "the harbor" (location unknown, no known escape by sea from Pompeii) or change to "the gates" / "out of the city"? This also decides what Part 2 can reveal for Option A.
+5. Line 14: move the pillows to the later part of the story (they were used at night at Stabiae), or keep them in the afternoon as a general image?
+6. Line 10: change "Almost harmless" to "Not dangerous, at first"? (Recommended: yes; it sets up lines 17-23.)
+
+### SUMMARY (this section)
+9 keep, 10 reword, 0 cut, 2 open (sea escape at Pompeii; whether to keep "the harbor").
