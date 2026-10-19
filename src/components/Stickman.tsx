@@ -36,6 +36,7 @@ type Props = {
   headFill?: string;
   facing?: "left" | "right";
   seed?: number; // shifts the wobble so two stickmen never move in sync
+  rim?: string; // light edge around the figure so he stays visible on dark backgrounds
 };
 
 // Body measurements in stickman units (about 206 units tall at scale 1).
@@ -47,6 +48,7 @@ const FOREARM = 32;
 const THIGH = 44;
 const SHIN = 46;
 const STROKE = 8;
+const RIM = 3.5; // width of the light edge on each side of a line
 
 // Angles in degrees: 0 = straight down, +90 = toward the facing direction, 180 = straight up.
 // A limb has two angles: upper segment, lower segment.
@@ -158,6 +160,7 @@ export const Stickman: React.FC<Props> = ({
   headFill = "#ffffff",
   facing = "right",
   seed = 0,
+  rim = "none",
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -189,8 +192,28 @@ export const Stickman: React.FC<Props> = ({
     strokeLinejoin: "round" as const,
   };
 
+  // The rim is a filter: it grows the figure's shape a little and paints that in the rim color
+  // behind it, so every part (also "?" or shock lines) gets the light edge.
+  const rimId = `stickman-rim-${rim.replace(/[^a-zA-Z0-9]/g, "")}`;
+
   return (
-    <g transform={`translate(${x} ${y}) rotate(${sway * flip}) scale(${scale * flip} ${scale})`}>
+    <g
+      transform={`translate(${x} ${y}) rotate(${sway * flip}) scale(${scale * flip} ${scale})`}
+      filter={rim === "none" ? undefined : `url(#${rimId})`}
+    >
+      {rim !== "none" && (
+        <defs>
+          <filter id={rimId} x="-50%" y="-50%" width="200%" height="200%">
+            <feMorphology in="SourceAlpha" operator="dilate" radius={RIM} result="grown" />
+            <feFlood floodColor={rim} />
+            <feComposite in2="grown" operator="in" />
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+      )}
       <polyline points={toPoints(backLeg, dy)} {...line} />
       <polyline points={toPoints(frontLeg, dy)} {...line} />
       <polyline points={toPoints([hip, neck], dy)} {...line} />

@@ -24,7 +24,7 @@ export const RemotionRoot: React.FC = () => {
         fps={FPS}
         durationInFrames={FPS * 6}
       />
-      {(["warm", "dusk", "line"] as const).map((style) => (
+      {(["warm", "ash", "dark", "dusk", "line"] as const).map((style) => (
         <Composition
           key={style}
           id={`StyleTest-${style}`}
