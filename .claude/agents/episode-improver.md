@@ -43,8 +43,9 @@ and code in English.
 - Do only the approved items. If you notice something else, list it under SUGGESTIONS and leave it.
 - Script wording belongs to Luis. Never rewrite script text on your own. Apply only the exact
   wording the caller gives you ("line 7 becomes: ...").
-- Respect the constraints in CLAUDE.md: free tools only, no AI-generated imagery, voice only, max 90 s,
-  1080x1920 at 30 fps.
+- Respect the constraints in CLAUDE.md: free tools only, no AI-generated imagery, audio = voice +
+  bleep + the sound effects from the MSV1 template only (self-made or CC0, each listed in
+  notes/sfx-licenses.md; no music), max 90 s, 1080x1920 at 30 fps.
 - You cannot ask before big actions, so do not do them: no downloads over 200 MB (for example
   a Whisper or Kokoro model), no global installs, nothing paid, no deleting files. Return
   NEEDS DECISION instead.

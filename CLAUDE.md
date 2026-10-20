@@ -6,7 +6,8 @@ Each episode is a first-person (POV) disaster or decision moment from history an
 A/B choice the audience votes on in the comments. The next part plays out the winning choice and
 then reveals what really happened.
 
-Pilot episode: Pompeii, 79 AD (baker, run to the harbor vs. shelter inside).
+Pilot episode: Pompeii, 79 AD (baker, run to the harbor vs. shelter inside). This is the OLD pilot
+(ep01-pompeii-part1, render v1): it stays as it is and is not developed further.
 Video language: English.
 
 ## Working with me (I am a coding beginner)
@@ -28,7 +29,10 @@ Video language: English.
 ## Hard constraints
 - 100% free tools. No paid APIs, no API keys, no subscriptions.
 - No AI-generated images or video. All visuals are hand-built SVG / React components.
-- Audio is the voiceover ONLY. No music, no sound effects.
+- Audio: the voiceover, the bleep for strong words, and the sound effects from the MSV1 template
+  (notes/msv1-template.md: rewind, angel choir, buzzer, record scratch, portal hum, warning siren,
+  slapstick hit). Every sound effect is made by us (e.g. with ffmpeg) or CC0; note its source and
+  license in notes/sfx-licenses.md. No music.
 - Output: 1080x1920 (9:16), 30 fps, MP4. Target 80-90 s, hard maximum 90 s.
 - All on-screen text is English.
 

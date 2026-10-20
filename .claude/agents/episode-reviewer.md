@@ -78,7 +78,10 @@ NEEDS DECISION: list (or "none")
 - Every problem needs evidence (timestamp, line number, frame). No vague "could be better".
 - If the video is good, say so and propose what to test next (for example two hook variants).
 - Proposals must respect the hard constraints in CLAUDE.md: free tools, no AI-generated imagery,
-  voice only, max 90 s, 1080x1920 at 30 fps.
+  audio = voice + bleep + the sound effects from the MSV1 template only (no music), max 90 s,
+  1080x1920 at 30 fps.
+- Sound check: every sound effect in the render is one from notes/msv1-template.md, is listed with
+  its source and license in notes/sfx-licenses.md (self-made or CC0), and never drowns out the voice.
 - Script wording belongs to Luis. Offer alternatives as suggestions, never as decisions.
 - If a command fails or a file is missing, report the exact error and what you tried. Never report
   a check as passed that you did not run.
