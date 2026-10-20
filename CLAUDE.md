@@ -49,10 +49,12 @@ Video language: English.
 /scripts/             voice generation, caption generation
 /out/                 rendered MP4s, named <episode-id>-v1.mp4, -v2.mp4 ...
 /out/review/          still frames the reviewer renders for inspection
+/episodes/<episode-id>/drafts/   script drafts from the story-writer (part1-draft-1.md, ...)
 /notes/iteration-log.md
 /notes/facts/         fact-check notes and research briefs, one file per episode
+/notes/pitches.md     episode ideas from the story-writer
 /.backup/             copies of files the improver made before it edited them
-/.claude/agents/      episode-reviewer.md, episode-improver.md, history-fact-checker.md
+/.claude/agents/      episode-reviewer.md, episode-improver.md, history-fact-checker.md, story-writer.md
 ```
 
 ## How voice and timing work
@@ -113,6 +115,10 @@ end of its last line.
   web sources, rates it (confirmed / likely / disputed / legend / unsupported), suggests safe
   wording, and can write a research brief for a new episode. It never edits the script; it only
   writes notes/facts/<episode-id>.md.
+- **story-writer**: the storyteller. Pitches episode ideas, drafts hooks and Part 1 / Part 2
+  scripts, or polishes my own draft. Takes facts only from notes/facts/<episode-id>.md, never
+  invents history, and never edits script.txt. It only writes episodes/<episode-id>/drafts/
+  (numbered, never overwritten) and appends to notes/pitches.md.
 Subagents cannot ask me questions. If they need a decision they return it as NEEDS DECISION, and the
 main session asks me.
 
@@ -127,6 +133,13 @@ main session asks me.
 5. Run episode-reviewer on the new version and compare it with the previous one. Tell me plainly
    whether it got better, worse or stayed the same, and why.
 Change ONE thing at a time (hook, voice speed, caption style, pacing) so I can see what helped.
+
+### Writing a new script (before any voice is recorded)
+1. New topic: history-fact-checker in BRIEF mode writes notes/facts/<episode-id>.md.
+2. story-writer in PITCH mode (ideas) or DRAFT mode (script) works from those notes.
+3. I choose and rewrite. My wording decides; drafts are raw material.
+4. history-fact-checker in CHECK mode on the chosen draft; I approve each reword.
+5. Only then the draft becomes script.txt and the voice step runs.
 
 ### Auto mode (only when I say so, e.g. "auto, 3 rounds")
 Repeat the loop for the number of rounds I named (max 3), taking the reviewer's top fix each time
