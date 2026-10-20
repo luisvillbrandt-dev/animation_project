@@ -18,6 +18,12 @@ Video language: English.
 - If something fails: explain the error in plain words, propose a fix, and ask if you are unsure.
 - Detect my operating system yourself (Windows or Mac) and use the right commands.
 - If git is set up, commit after each working step with a clear message.
+- Checkpoints: after every finished step, and always BEFORE a risky change (big refactor, script
+  change, deleting or moving files), save a checkpoint with `npm run checkpoint -- "<what>"`.
+  It commits everything, tags it stand-<date>-<time> and uploads it to GitHub. Tell me the name.
+- Going back: when I say "zurück auf <checkpoint>", restore that state as a NEW commit
+  (`git restore --source=<tag> --staged --worktree .`, then commit), never with reset or force
+  push, so nothing in between gets lost. Save a checkpoint of the current state first.
 
 ## Hard constraints
 - 100% free tools. No paid APIs, no API keys, no subscriptions.
@@ -178,4 +184,5 @@ summary: what changed per version and which version I should post.
   - Remotion's public folder is `episodes/`, so `staticFile("<episode-id>/voice/voice.wav")` works.
   - Caption style: `src/components/Captions.tsx`; test view: composition `CaptionsTest`.
 - Check the code for type errors: `npm run typecheck`
+- Save a checkpoint: `npm run checkpoint -- "<description>"` · list them: `npm run checkpoints`
 - Shared video settings (size, fps, safe area): `src/video.ts`
