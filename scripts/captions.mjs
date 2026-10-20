@@ -68,19 +68,11 @@ const output = await transcribe({
 const heard = toCaptions({ whisperCppOutput: output }).captions.filter((c) => normalize(c.text) !== "");
 
 // 5. Put the script's own words onto Whisper's timing.
-const scriptWords = fs.existsSync(script) ? readScriptWords(fs.readFileSync(script, "utf8")) : [];
-const words = scriptWords.map((w) => w.text);
+const words = fs.existsSync(script)
+  ? fs.readFileSync(script, "utf8").split(/\s+/).filter((w) => normalize(w) !== "")
+  : [];
 const aligned = words.length ? alignToScript(heard, words) : { captions: heard, fixed: 0 };
 const { fixed } = aligned;
-
-// Words written as [[word]] are bleeped in the video: mark them and mask them in the captions.
-for (const c of aligned.captions) {
-  if (c._word !== undefined && scriptWords[c._word]?.bleep) {
-    c.bleep = true;
-    c.text = c.text.replace(/[A-Za-z]+/, (w) => w[0] + "*".repeat(w.length - 1));
-  }
-  delete c._word;
-}
 
 // 6. Whisper stretches each word up to the start of the next one, also across pauses.
 // timing.json knows exactly when every line starts and ends, so keep each word inside its line.
@@ -93,22 +85,6 @@ fs.writeFileSync(path.join(dir, "captions.json"), JSON.stringify(captions, null,
 console.log(`Captions: ${captions.length} words (Whisper heard ${heard.length}, script has ${words.length}).`);
 console.log(`Words taken from the script instead of Whisper's spelling: ${fixed}`);
 console.log(`Written: episodes/${episode}/captions.json`);
-
-// The spoken words of script.txt: [SFX: ...] lines and {f:id} fact tags are skipped, [[word]] is
-// kept as the word and flagged for the bleep (same rules as scripts/voice.py).
-function readScriptWords(text) {
-  const out = [];
-  for (const raw of text.split(/\r?\n/)) {
-    const line = raw.trim();
-    if (/^\[SFX:[^\]]*\]$/i.test(line)) continue;
-    for (const token of line.replace(/\{f:[^}]*\}/g, " ").split(/\s+/)) {
-      const bleep = /\[\[[^\]]*\]\]/.test(token);
-      const word = token.replace(/\[\[|\]\]/g, "");
-      if (normalize(word) !== "") out.push({ text: word, bleep });
-    }
-  }
-  return out;
-}
 
 function normalize(word) {
   return word.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -136,8 +112,7 @@ function fitToLines(captions, timing) {
     words.forEach((c, i) => {
       const estimate = lineStart + (before / total) * (lineEnd - lineStart);
       before += weights[i];
-      const trusted = Number.isFinite(c.startMs) && Math.abs(c.startMs - estimate) <= TRUST_MS;
-      let start = trusted ? c.startMs : Math.round(estimate);
+      let start = Math.abs(c.startMs - estimate) <= TRUST_MS ? c.startMs : Math.round(estimate);
       start = Math.min(Math.max(start, lineStart, previousStart + MIN_MS), lineEnd - MIN_MS);
       c.startMs = start;
       previousStart = start;
@@ -157,7 +132,7 @@ function fail(message) {
 
 // Classic edit-distance alignment between what Whisper heard and the script words.
 // Matched and substituted words get the script's spelling; words Whisper invented are dropped;
-// script words Whisper missed stay as their own word (time estimated later), so nothing is lost.
+// script words Whisper missed are glued onto the previous word so nothing is lost.
 function alignToScript(heard, words) {
   const a = heard.map((c) => normalize(c.text));
   const b = words.map(normalize);
@@ -172,21 +147,22 @@ function alignToScript(heard, words) {
   let fixed = 0;
   let i = a.length;
   let j = b.length;
+  const pending = []; // script words with no Whisper word, waiting for a neighbour
   while (i > 0 || j > 0) {
     if (i > 0 && j > 0 && d[i][j] === d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)) {
       const c = heard[i - 1];
-      if (c.text.trim() !== words[j - 1]) fixed++;
-      out.unshift({ ...c, text: ` ${words[j - 1]}`, _word: j - 1 });
+      const text = [words[j - 1], ...pending.splice(0)].join(" ");
+      if (normalize(c.text) !== normalize(text) || c.text.trim() !== text) fixed++;
+      out.unshift({ ...c, text: ` ${text}` });
       i--;
       j--;
     } else if (j > 0 && (i === 0 || d[i][j] === d[i][j - 1] + 1)) {
-      // A script word Whisper did not hear: keep it as its own word; fitToLines estimates its time.
-      out.unshift({ text: ` ${words[j - 1]}`, startMs: NaN, endMs: NaN, timestampMs: NaN, confidence: 0, _word: j - 1 });
-      fixed++;
+      pending.unshift(words[j - 1]);
       j--;
     } else {
       i--; // a word Whisper heard that is not in the script
     }
   }
+  if (pending.length && out.length) out[0].text = ` ${pending.join(" ")}${out[0].text}`;
   return { captions: out, fixed };
 }

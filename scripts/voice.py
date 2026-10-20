@@ -13,13 +13,9 @@ Writes:
   episodes/<id>/voice/voice.wav     all lines joined with pauses
   episodes/<id>/timing.json         [{"line": 1, "text": "...", "start": 0.15, "end": 3.2}, ...]
 
-  episodes/<id>/cues.json           {"sfx": [{"name": "buzzer", "at": 40.1}, ...]} sound effects in seconds
-
 script.txt: one sentence per line. An empty line means a longer pause; two empty lines a pause twice
 as long (used after the hook, while the intro travels through time). Line numbers are the line
-numbers you see in the editor; empty lines and [SFX] lines get no entry in timing.json.
-Markup from the story-writer is understood: {f:id} fact tags are dropped, [[word]] is spoken (and
-bleeped later in the video), and a line "[SFX: name]" becomes a sound-effect cue instead of speech.
+numbers you see in the editor; empty lines get no entry in timing.json.
 
 Voices (the first letter is the accent: a = American, b = British; the second: m = male, f = female):
   am_michael, am_adam, am_eric, am_liam, am_onyx, am_fenrir, am_puck, am_echo
@@ -31,7 +27,6 @@ Force the accent with a prefix: "b:am_michael" speaks Michael's voice with Briti
 
 import argparse
 import json
-import re
 import sys
 import warnings
 from pathlib import Path
@@ -49,55 +44,19 @@ TRIM_PADDING = 0.03  # seconds of silence kept at both ends of a line
 MAX_SECONDS = 90
 
 
-FACT_TAG = re.compile(r"\s*\{f:[^}]*\}")  # {f:pompeii-003} fact IDs, only for the fact check
-BLEEP = re.compile(r"\[\[([^\]]+)\]\]")  # [[word]] is spoken, then bleeped in the video
-SFX_LINE = re.compile(r"^\[SFX:\s*([^\]]+)\]$", re.IGNORECASE)  # [SFX: buzzer] on its own line
-
-
-def spoken(text):
-    """The words the narrator actually says: no fact IDs, bleep brackets removed."""
-    return BLEEP.sub(r"\1", FACT_TAG.sub("", text)).strip()
-
-
 def read_script(path):
-    """Returns (lines, cues).
-    lines: (line_number, spoken_text, empty_lines_before) for every spoken line.
-    cues: sound effects. An [SFX] line right after a spoken line plays when that line ends; after an
-    empty line it plays just before the next spoken line starts."""
+    """Returns a list of (line_number, text, empty_lines_before) for every spoken line."""
     lines = []
-    cues = []
     empty_before = 0
     for number, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
         text = raw.strip()
-        sfx = SFX_LINE.match(text)
-        if sfx:
-            if lines and empty_before == 0:
-                cues.append({"name": sfx.group(1).strip(), "after_line": lines[-1][0]})
-            else:
-                cues.append({"name": sfx.group(1).strip(), "before_index": len(lines)})
-            continue
         if not text:
             if lines:  # empty lines at the very top are ignored
                 empty_before += 1
             continue
-        lines.append((number, spoken(text), empty_before))
+        lines.append((number, text, empty_before))
         empty_before = 0
-    return lines, cues
-
-
-def place_cues(cues, lines, timing):
-    """Turns the cues into seconds on the voice timeline."""
-    by_line = {t["line"]: t for t in timing}
-    placed = []
-    for c in cues:
-        if "after_line" in c:
-            at = by_line[c["after_line"]]["end"] + 0.05
-        elif c["before_index"] < len(timing):
-            at = max(0.0, timing[c["before_index"]]["start"] - 0.25)
-        else:
-            at = timing[-1]["end"] + 0.05
-        placed.append({"name": c["name"], "at": round(at, 3)})
-    return placed
+    return lines
 
 
 def trim(audio):
@@ -164,18 +123,15 @@ def main():
     parser.add_argument("--samples", help="comma-separated voices to compare; writes voice/samples/")
     args = parser.parse_args()
 
-    episode = ROOT / "episodes" / args.episode
     config = json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
-    # An episode can override single settings (e.g. shorter pauses) in its own voice.config.json.
-    episode_config = episode / "voice.config.json"
-    if episode_config.exists():
-        config.update(json.loads(episode_config.read_text(encoding="utf-8")))
     voice = args.voice or config["voice"]
     speed = args.speed or config["speed"]
+
+    episode = ROOT / "episodes" / args.episode
     script = episode / "script.txt"
     if not script.exists():
         sys.exit(f"Not found: {script}")
-    lines, cues = read_script(script)
+    lines = read_script(script)
     if not lines:
         sys.exit(f"{script} has no text.")
 
@@ -204,13 +160,9 @@ def main():
     audio, timing = join(clips, lines, config)
     sf.write(voice_dir / "voice.wav", audio, SAMPLE_RATE)
     (episode / "timing.json").write_text(json.dumps(timing, indent=2) + "\n", encoding="utf-8")
-    placed = place_cues(cues, lines, timing)
-    (episode / "cues.json").write_text(json.dumps({"sfx": placed}, indent=2) + "\n", encoding="utf-8")
 
     for entry in timing:
         print(f"  line {entry['line']:>2}  {entry['start']:6.2f} - {entry['end']:6.2f} s  {entry['text']}")
-    for c in placed:
-        print(f"  sfx {c['name']:<16} at {c['at']:6.2f} s")
     total = len(audio) / SAMPLE_RATE
     print(f"Total voice length: {total:.1f} s")
     if total > MAX_SECONDS:
